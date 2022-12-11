@@ -12,12 +12,19 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import DiamondIcon from '@mui/icons-material/Diamond';
+import { AccountDetails } from "../../ledgers/KeplrLedger";
 
 const pages = ["Assets", "Mint"];
 const settings = ["Logout"];
 
-function Nav() {
-    const isWalletConnected = false;
+interface NavProps {
+  connect: () => Promise<void>,
+  account: AccountDetails | null,
+  disconnect: () => void,
+}
+
+function Nav({connect, account, disconnect}: NavProps) {
+  
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -30,6 +37,7 @@ function Nav() {
   };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
+   
   };
 
   const handleCloseNavMenu = () => {
@@ -122,7 +130,7 @@ function Nav() {
                 <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
 
             {   
-                isWalletConnected &&
+                account?.address !==null &&
                 <>
                 {pages.map((page) => (
                 <Button
@@ -139,11 +147,15 @@ function Nav() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {isWalletConnected 
+            {account 
             ?
             <>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar sx={{ bgcolor: 'text.secondary', width: 48, height: 48, borderColor: 'primary'}} sizes="md" aria-label="symbol">
+                  <Typography sx={{fontSize: 10, fontWeight:'bold'}}>
+                      {(account!.username.substring(0, 5)).toLocaleUpperCase()}
+                  </Typography>
+                </Avatar>
                 </IconButton>
 
                 <Menu
@@ -170,7 +182,7 @@ function Nav() {
                 </Menu>
             </>            
             :
-            <Button color="secondary" variant="contained">Connect Wallet</Button>
+            <Button color="secondary" variant="contained" onClick={connect}>Connect Wallet</Button>
             }
           </Box>
         </Toolbar>
