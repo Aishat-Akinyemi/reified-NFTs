@@ -15,13 +15,19 @@ export const Collection = () => {
             boxShadow: 1,
             borderRadius: 5,
             p: 2,
-            borderColor: 'secondary.light'
+            borderColor: 'secondary.light',
+            '&:hover': {
+                // backgroundColor: 'primary.main',
+                opacity: [0.9, 0.8, 0.7],
+              },
             }} variant="outlined">
         <CardHeader
             avatar={
                 <Tooltip title={denom.symbol}>
-                    <Avatar sx={{ bgcolor: 'primary.light', width: 64, height: 64, borderColor: 'primary'}} sizes="md" aria-label="symbol">
-                    {(denom.symbol.substring(0, 5)).toLocaleUpperCase()}
+                    <Avatar sx={{ bgcolor: 'primary.light', width: 48, height: 48, borderColor: 'primary'}} sizes="md" aria-label="symbol">
+                        <Typography sx={{fontSize: 10, fontWeight:'bold' }}>
+                            {(denom.symbol.substring(0, 5)).toLocaleUpperCase()}
+                        </Typography>
                     </Avatar>
                 </Tooltip>
             }

@@ -1,11 +1,10 @@
     export interface Denom   {
-        id: string;
+        id?: string;
         name: string;
         schema?: string;
         creator: string;
         symbol?: string;
     }  
-    
     export interface Nft  {
         id: string;
         name: string;
@@ -35,4 +34,23 @@
         nextkey: {}
     }
 
+    export interface IssueMessage {
+        denomId: string;
+        name: string;
+        symbol: string;
+        from: string;
+        schema: string;
+        chainId: string;
+    }
+    
+
+    export interface MintMessage {
+        denomId: string;
+        name: string;
+        uri: string;
+        data: string;
+        from: string;
+        recipient: string;
+        chainId: string;
+    }
     
