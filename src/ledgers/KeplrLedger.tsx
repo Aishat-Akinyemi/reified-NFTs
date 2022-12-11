@@ -1,5 +1,9 @@
 import { GasPrice, SigningCosmWasmClient, SigningStargateClient } from "cudosjs";
 
+export type AccountDetails = 
+  {address: string, username: string}
+
+
 export const keplrSigningClient = async (  
 ): Promise<SigningStargateClient> => {
   if (!window.keplr || !window.keplr.getOfflineSignerAuto) {
@@ -20,12 +24,12 @@ export const keplrSigningClient = async (
   const client = await SigningStargateClient.connectWithSigner(
     import.meta.env.VITE_APP_RPC,
     offlineSigner
-  );
+  );  
 
   return client;
 }
 
-export const getConnectedAccount =async () => {
+export const getConnectedAccount =async (): Promise<AccountDetails> => {
     const key = await window.keplr!.getKey(import.meta.env.VITE_APP_CHAIN_ID);    
     return{ address: key.bech32Address, username: key.name};
 }
