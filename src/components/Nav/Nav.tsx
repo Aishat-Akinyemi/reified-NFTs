@@ -21,9 +21,10 @@ interface NavProps {
   connect: () => Promise<void>,
   account: AccountDetails | null,
   disconnect: () => void,
+  isConnected: boolean
 }
 
-function Nav({connect, account, disconnect}: NavProps) {
+function Nav({connect, account, disconnect, isConnected}: NavProps) {
   
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -41,6 +42,7 @@ function Nav({connect, account, disconnect}: NavProps) {
   };
 
   const handleCloseNavMenu = () => {
+    console.log(`www`);
     setAnchorElNav(null);
   };
 
@@ -130,7 +132,7 @@ function Nav({connect, account, disconnect}: NavProps) {
                 <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
 
             {   
-                account?.address !==null &&
+                isConnected &&
                 <>
                 {pages.map((page) => (
                 <Button
@@ -147,7 +149,7 @@ function Nav({connect, account, disconnect}: NavProps) {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {account 
+            {isConnected 
             ?
             <>
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
@@ -175,7 +177,10 @@ function Nav({connect, account, disconnect}: NavProps) {
                 onClose={handleCloseUserMenu}
                 >
                 {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                    <MenuItem key={setting} onClick={(e)=> {
+                      handleCloseUserMenu();
+                      disconnect();
+                    }}>
                     <Typography textAlign="center">{setting}</Typography>
                     </MenuItem>
                 ))}
