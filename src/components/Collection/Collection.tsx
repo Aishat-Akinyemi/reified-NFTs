@@ -1,16 +1,18 @@
 import React from 'react'
 import { Tooltip, Box, Card, CardHeader, CardContent, CardActions, Avatar, IconButton, IconButtonProps, Typography } from '@mui/material'
 import { OpenInFullRounded, MoreVert  } from '@mui/icons-material';
+import { Denom } from '../../types/nft';
 
+type CollectionProps = {
+    denom: Denom
+}
 
-
-// export const Collection = (denom: Denom) => {
-export const Collection = () => {
-    const denom = denom1.denom;
+export const Collection = ({denom}:CollectionProps) => {    
   return (
     <Box>
         <Card sx={{ 
             maxWidth: 400, 
+            height: 300,
             bgcolor: 'background.default',
             boxShadow: 1,
             borderRadius: 5,
@@ -26,7 +28,11 @@ export const Collection = () => {
                 <Tooltip title={denom.symbol}>
                     <Avatar sx={{ bgcolor: 'primary.light', width: 48, height: 48, borderColor: 'primary'}} sizes="md" aria-label="symbol">
                         <Typography sx={{fontSize: 10, fontWeight:'bold' }}>
-                            {(denom.symbol.substring(0, 5)).toLocaleUpperCase()}
+                            {(denom.symbol)?
+                                (denom.symbol.substring(0, 5)).toLocaleUpperCase()
+                                :
+                                ''
+                            }
                         </Typography>
                     </Avatar>
                 </Tooltip>
@@ -46,7 +52,7 @@ export const Collection = () => {
             subheader={
                 <Tooltip title={denom.creator}>
                     <Typography sx={{ my: 1.5, fontSize: 12 }} color="text.secondary">
-                     {`${denom.creator.substring(0, 30)}...`}
+                     {`${denom.creator.substring(0, 20)}...`}
                     </Typography>
                 </Tooltip>
             }
@@ -68,12 +74,3 @@ export const Collection = () => {
   )
 }
 
-const denom1 = {
-        "denom": {
-            "id": "testdenom",
-            "name": "TESTDENOM",
-            "schema": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id aperiam rerum, dicta aliquid earum quod reprehenderit, fugiat cupiditate ipsam dolores odit exercitationem! Deleniti pariatur dicta minima fuga a fugiat aperiam. ",
-            "creator": "cudos1knf0flyucc2ut40cg8tn48sp70p2e65wse7qec",
-            "symbol": "testSymbol"
-        }
-    }
