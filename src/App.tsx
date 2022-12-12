@@ -15,6 +15,7 @@ import { keplrSigningClient, getConnectedAccount, AccountDetails } from './ledge
 import { CollectioList } from './components/Collection/CollectionList';
 import { NftList } from './components/Nft/NftList';
 import {Mint} from './components/MintForm/Mint';
+import { IssueMessage, MintMessage } from './types/nft';
 
 function App() {  
   const [nftSingingClient, setNftSigningClient] = useState<NftClient | null>(null);
@@ -39,17 +40,52 @@ function App() {
         setIsConnected(true);
       } catch (error:any){
           enqueueSnackbar(`Error Connecting! ${error.message}`, {
-               variant: 'error',
-               persist: true
+               variant: 'error'
           });
       } 
   }
   const getAllNftsById = async (denomId: string) =>{
     return await nftQueryClient.getAllTokensInCollection(denomId)
   } 
-
-  return (
   
+ const createDenom = async (denomMessage: IssueMessage) => {
+      try {
+         if(isConnected){
+            await nftSingingClient?.issueDenom(denomMessage);
+            enqueueSnackbar('Collection Created', {
+              variant: 'success'
+            })
+            return denomMessage.id;
+         }
+         else throw new Error("Keplr Wallet not connected");         
+      } catch (error: any) {
+        console.log(error);
+        enqueueSnackbar(error.message, {
+          variant: 'error'
+        })
+      }
+ }
+
+ const mintNft = async (mintMessage: MintMessage) => {
+  try {
+    if(isConnected){
+       await nftSingingClient?.mintNFT(mintMessage);
+       enqueueSnackbar('NFT Minted', {
+        variant: 'success'
+      })
+       return mintMessage.denomId;
+    }
+    else throw new Error("Keplr Wallet not connected");         
+ } catch (error: any) {
+   console.log(error);
+   enqueueSnackbar(error.message, {
+     variant: 'error'
+   })
+ }
+
+ }
+
+  return (  
        <Box sx={{ maxWidth: '100%' }} >      
         <ThemeProvider theme={theme}>        
           <CssBaseline/>
@@ -61,8 +97,7 @@ function App() {
                   {/* <Route path='/collections/:denomId' element={<Submission user={user} />}/> */}
                   <Route path='/collections' element={<CollectioList getDenom={nftQueryClient.getAllDenoms()} account={account} />}/>
                   <Route path='/assets' element={<NftList getNft={getAllNftsById} account={account}/>}/>
-                  <Route path='/mint' element={<Mint/>}/>
-                  {/* <Route path='/' element={}/> */}
+                  <Route path='/mint' element={<Mint createDenom={createDenom} mintNft={mintNft} account={account}/>}/>
                   <Route path='*' element={<Home/>}/>
               </Routes>
               </Box>         
