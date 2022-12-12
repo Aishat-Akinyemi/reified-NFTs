@@ -2,12 +2,16 @@ import React from 'react'
 import { Tooltip, Box, Card, CardHeader, CardContent, CardActions, Avatar, IconButton, IconButtonProps, Typography } from '@mui/material'
 import { OpenInFullRounded, MoreVert  } from '@mui/icons-material';
 import { Denom } from '../../types/nft';
+import {useNavigate} from 'react-router-dom';
 
 type CollectionProps = {
     denom: Denom
 }
 
-export const Collection = ({denom}:CollectionProps) => {    
+export const Collection = ({denom}:CollectionProps) => {  
+    let navigate = useNavigate();
+    
+    
   return (
     <Box>
         <Card sx={{ 
@@ -64,7 +68,11 @@ export const Collection = ({denom}:CollectionProps) => {
         </CardContent>
         <CardActions disableSpacing>
             <Tooltip title="View NFTs in Collection">
-                <IconButton aria-label="View Collection">
+                <IconButton aria-label="View Collection"
+                    onClick={() => {
+                        navigate(`/assets/${denom.id}`, {state:denom.id})
+                    }}
+                >
                 <OpenInFullRounded color='primary'/>
                 </IconButton> 
             </Tooltip>                       

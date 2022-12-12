@@ -12,8 +12,6 @@ type CollectioListProps  = {
     account: AccountDetails|null,
 }
 export const CollectioList = ({getDenom, account}: CollectioListProps) => {
-    
-    const [denomResp, setDenomResp] = useState<QueryDenomsResponse|null>();
     const [filteredDenoms, setFilteredDenom] = useState<Denom[]>([])
     useEffect(() => {
         (async () => {

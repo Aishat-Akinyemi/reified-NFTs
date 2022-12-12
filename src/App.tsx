@@ -13,6 +13,7 @@ import Nav from './components/Nav/Nav';
 import { NftClient, NftQueryClient } from './ledgers/NftClient';
 import { keplrSigningClient, getConnectedAccount, AccountDetails } from './ledgers/KeplrLedger';
 import { CollectioList } from './components/Collection/CollectionList';
+import { NftList } from './components/Nft/NftList';
 
 function App() {  
   const [nftSingingClient, setNftSigningClient] = useState<NftClient | null>(null);
@@ -42,7 +43,9 @@ function App() {
           });
       } 
   }
-  const x = nftQueryClient.getAllDenoms();
+  const getAllNftsById = async (denomId: string) =>{
+    return await nftQueryClient.getAllTokensInCollection(denomId)
+  } 
 
   return (
   
@@ -55,6 +58,7 @@ function App() {
                 <Route path='/' element={<Home/>}/>
                 {/* <Route path='/collections/:denomId' element={<Submission user={user} />}/> */}
                 <Route path='/collections' element={<CollectioList getDenom={nftQueryClient.getAllDenoms()} account={account} />}/>
+                <Route path='/assets' element={<NftList getNft={getAllNftsById} account={account}/>}/>
                 {/* <Route path='/' element={}/> */}
                 <Route path='*' element={<Home/>}/>
             </Routes>         

@@ -1,9 +1,9 @@
     export interface Denom   {
-        id?: string;
+        id: string;
         name: string;
-        schema?: string;
+        schema: string;
         creator: string;
-        symbol?: string;
+        symbol: string;
     }  
     export interface Nft  {
         id: string;
@@ -16,7 +16,7 @@
 
     export interface Collection  {
         denom: Denom;
-        nfts?: []
+        nfts?: Nft[]
     }
     
     export interface AllTokenResponse   {
