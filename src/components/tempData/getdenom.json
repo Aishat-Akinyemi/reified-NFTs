@@ -1,0 +1,9 @@
+{
+    "denom": {
+        "id": "testdenom",
+        "name": "TESTDENOM",
+        "schema": "testschema",
+        "creator": "cudos1knf0flyucc2ut40cg8tn48sp70p2e65wse7qec",
+        "symbol": "testSymbol"
+    }
+}

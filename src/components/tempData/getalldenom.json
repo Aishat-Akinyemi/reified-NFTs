@@ -1,0 +1,495 @@
+{
+    "denoms": [
+        {
+            "id": "adenom1",
+            "name": "hello hello hello",
+            "schema": "",
+            "creator": "cudos1nj49l56x7sss5hqyvfmctxr3mq64whg273g3x5",
+            "symbol": "symadenom1"
+        },
+        {
+            "id": "alextestdenomvid1",
+            "name": "Alex Test Denom Video 1",
+            "schema": "",
+            "creator": "cudos1knf0flyucc2ut40cg8tn48sp70p2e65wse7qec",
+            "symbol": "alextestvidSymbol"
+        },
+        {
+            "id": "anotherdenom",
+            "name": "created with some other account",
+            "schema": "",
+            "creator": "cudos1nj49l56x7sss5hqyvfmctxr3mq64whg273g3x5",
+            "symbol": "symanotherdenom"
+        },
+        {
+            "id": "anvilorg",
+            "name": "anvilorg",
+            "schema": "",
+            "creator": "cudos1jxyc7lny4q7te6sj5xyt9j86kyz82vlfdprl4a",
+            "symbol": "symanvilorg"
+        },
+        {
+            "id": "bagel1",
+            "name": "bagels",
+            "schema": "",
+            "creator": "cudos17h6h89mm5jxhxjsqjlxths8g8f5xhw40drmjgq",
+            "symbol": "bagel1"
+        },
+        {
+            "id": "catfood",
+            "name": "Cat Food",
+            "schema": "",
+            "creator": "cudos18mqn8vssedje6ux24apmpl5y8fsn7ajvh2zvqt",
+            "symbol": "symcatfood"
+        },
+        {
+            "id": "cmeme",
+            "name": "Cool Meme",
+            "schema": "",
+            "creator": "cudos1lk0kj8zv9867cq3v72pzpm2tfdqvugvetetsxp",
+            "symbol": "CMEME"
+        },
+        {
+            "id": "collection01",
+            "name": "FromRussia",
+            "schema": "",
+            "creator": "cudos1nf97e98md0vf98qzpu082445qlvytsren9689e",
+            "symbol": "symcollection01"
+        },
+        {
+            "id": "cudobots",
+            "name": "The Cudo Bots",
+            "schema": "",
+            "creator": "cudos14ln9k2xqmldnakdxqycu8v4rylajnkrf4c8egz",
+            "symbol": "CudoBotSymbol"
+        },
+        {
+            "id": "cudosbackdropcollection",
+            "name": "The Cudos Backdrop Collection",
+            "schema": "",
+            "creator": "cudos1vfgc45smrr5vuydzqvv0w8vc2gknxm9z9xf5yg",
+            "symbol": "cudosbackdropcollection"
+        },
+        {
+            "id": "cudostestminting",
+            "name": "NFT Minting Platform",
+            "schema": "",
+            "creator": "cudos18zrn7w3veefmcn4ra8ywlltfcme7uuzpjyrd6x",
+            "symbol": "CTM"
+        },
+        {
+            "id": "dannft",
+            "name": "dannft",
+            "schema": "",
+            "creator": "cudos17lkl2ce4ee440teswxr757kafyz3m9x6f80pl4",
+            "symbol": "TST"
+        },
+        {
+            "id": "demon",
+            "name": "Baal",
+            "schema": "",
+            "creator": "cudos1tudhuwmhgfkj3skjfjszsp257pktz357zk5h6j",
+            "symbol": "symdemon"
+        },
+        {
+            "id": "denom1206",
+            "name": "My secure denom",
+            "schema": "",
+            "creator": "cudos123gpkxpch40v5zksr8ey2yjfnp8v4h7mdgjssz",
+            "symbol": "symdenom1206"
+        },
+        {
+            "id": "denom42",
+            "name": "another denom",
+            "schema": "",
+            "creator": "cudos1nj49l56x7sss5hqyvfmctxr3mq64whg273g3x5",
+            "symbol": "symdenom42"
+        },
+        {
+            "id": "dmtestcollectionid",
+            "name": "dmtest-collection-name",
+            "schema": "",
+            "creator": "cudos1tgz4vlcf8d87lp6c9d7ge9lfjel9a24sp9rq0w",
+            "symbol": "dmtest-collection-symbol"
+        },
+        {
+            "id": "hairyhairybear",
+            "name": "hairybear",
+            "schema": "",
+            "creator": "cudos1p3d9tnh0pd0rx35c2sa26vd7n6j94zflpru7fj",
+            "symbol": "Hairy Bear"
+        },
+        {
+            "id": "hznft",
+            "name": "Hz denom",
+            "schema": "",
+            "creator": "cudos12djehdktnaamdxf00u54cufj7j06jy4s8tzk02",
+            "symbol": "hznftnice"
+        },
+        {
+            "id": "ing",
+            "name": "lfg",
+            "schema": "lfg",
+            "creator": "cudos1yvtuaadhfhxf8ke7zm902z4rj382a8ayymq32s",
+            "symbol": "LFG"
+        },
+        {
+            "id": "joan1",
+            "name": "Joan's first denom",
+            "schema": "",
+            "creator": "cudos1nj49l56x7sss5hqyvfmctxr3mq64whg273g3x5",
+            "symbol": "symjoan1"
+        },
+        {
+            "id": "latetest",
+            "name": "latetest",
+            "schema": "",
+            "creator": "cudos1knf0flyucc2ut40cg8tn48sp70p2e65wse7qec",
+            "symbol": "latetest"
+        },
+        {
+            "id": "monkeys",
+            "name": "monkeys",
+            "schema": "",
+            "creator": "cudos18ewvr3l009guu0xlr30tzwf2sz3u54h762wdsk",
+            "symbol": "monkeys"
+        },
+        {
+            "id": "naojdenom",
+            "name": "asdf",
+            "schema": "",
+            "creator": "cudos1nj49l56x7sss5hqyvfmctxr3mq64whg273g3x5",
+            "symbol": "jj"
+        },
+        {
+            "id": "nftbind2",
+            "name": "testnftbind2",
+            "schema": "testnftbindschema2",
+            "creator": "cudos16lqnrmzlx79spad3xvnqfj584frmqzeejd6r7r",
+            "symbol": "nftb2"
+        },
+        {
+            "id": "nfttestbind3",
+            "name": "nfttestbind3name",
+            "schema": "nfttestbind3schema",
+            "creator": "cudos16lqnrmzlx79spad3xvnqfj584frmqzeejd6r7r",
+            "symbol": "nftb3"
+        },
+        {
+            "id": "nftver100",
+            "name": "nftv100",
+            "schema": "nftv100",
+            "creator": "cudos16lqnrmzlx79spad3xvnqfj584frmqzeejd6r7r",
+            "symbol": "nftv100"
+        },
+        {
+            "id": "nftver200",
+            "name": "nftv200",
+            "schema": "nftv200",
+            "creator": "cudos16lqnrmzlx79spad3xvnqfj584frmqzeejd6r7r",
+            "symbol": "nftv200"
+        },
+        {
+            "id": "nftwallet456",
+            "name": "nftw456",
+            "schema": "nfwtyh456",
+            "creator": "cudos16lqnrmzlx79spad3xvnqfj584frmqzeejd6r7r",
+            "symbol": "nft456"
+        },
+        {
+            "id": "otestdenomvid1",
+            "name": "O Test Denom Video 1",
+            "schema": "",
+            "creator": "cudos14ln9k2xqmldnakdxqycu8v4rylajnkrf4c8egz",
+            "symbol": "otestvidSymbol"
+        },
+        {
+            "id": "player",
+            "name": "Cudos Blockchain Player",
+            "schema": "test-denom-schema",
+            "creator": "cudos1yvtuaadhfhxf8ke7zm902z4rj382a8ayymq32s",
+            "symbol": "po"
+        },
+        {
+            "id": "pubdenom",
+            "name": "nftpub",
+            "schema": "",
+            "creator": "cudos1293k9glk3l8rp3e0wgfnu4r3jg54l5s0hxmx00",
+            "symbol": "afrpubdenom"
+        },
+        {
+            "id": "publictestdenom",
+            "name": "PublicTestDenom",
+            "schema": "PublicTestSchema",
+            "creator": "cudos1knf0flyucc2ut40cg8tn48sp70p2e65wse7qec",
+            "symbol": "PublicTestSymbol"
+        },
+        {
+            "id": "quicktest",
+            "name": "Adorable",
+            "schema": "",
+            "creator": "cudos1rehks63xxypvae8dx5hfjcndukvwhdndxtezja",
+            "symbol": "quicktest"
+        },
+        {
+            "id": "qwerty",
+            "name": "456 ./ )",
+            "schema": "&*^",
+            "creator": "cudos1nj49l56x7sss5hqyvfmctxr3mq64whg273g3x5",
+            "symbol": "cva"
+        },
+        {
+            "id": "random",
+            "name": "Random",
+            "schema": "",
+            "creator": "cudos1rehks63xxypvae8dx5hfjcndukvwhdndxtezja",
+            "symbol": "random"
+        },
+        {
+            "id": "sampleplayer",
+            "name": "Sample Player Denom",
+            "schema": "test-denom-schema",
+            "creator": "cudos1yvtuaadhfhxf8ke7zm902z4rj382a8ayymq32s",
+            "symbol": "SP"
+        },
+        {
+            "id": "scorpildenom",
+            "name": "My first denom",
+            "schema": "",
+            "creator": "cudos1w42r2gvd79sjnz03trnknxfnqk693fzw6n82wf",
+            "symbol": "symscorpildenom"
+        },
+        {
+            "id": "superqko",
+            "name": "Super Qko",
+            "schema": "",
+            "creator": "cudos1rehks63xxypvae8dx5hfjcndukvwhdndxtezja",
+            "symbol": "superqko"
+        },
+        {
+            "id": "test",
+            "name": "test",
+            "schema": "",
+            "creator": "cudos1urfshevd8x3t9xkfff7qnfnq5hg8n846y3czgh",
+            "symbol": "test"
+        },
+        {
+            "id": "test4",
+            "name": "test4",
+            "schema": "11111",
+            "creator": "cudos17h6h89mm5jxhxjsqjlxths8g8f5xhw40drmjgq",
+            "symbol": "111112"
+        },
+        {
+            "id": "testcollection",
+            "name": "Test collection",
+            "schema": "",
+            "creator": "cudos1q6qmsyhmgmpgu0pqwk29j43wq92mwqdsyfkv9c",
+            "symbol": "testcollection"
+        },
+        {
+            "id": "testcollection1",
+            "name": "Animal Collection - Test 1",
+            "schema": "",
+            "creator": "cudos1pkcp6k93l3gspxa2xvf82jznh84ynw6djhc7ef",
+            "symbol": "testcollection1"
+        },
+        {
+            "id": "testcollectionid",
+            "name": "test-collection-name",
+            "schema": "",
+            "creator": "cudos1h4kq3xrvxxszptx40y03fyzg8cauex2kfhux0j",
+            "symbol": "test-collection-symbol"
+        },
+        {
+            "id": "testdenom",
+            "name": "TESTDENOM",
+            "schema": "testschema",
+            "creator": "cudos1knf0flyucc2ut40cg8tn48sp70p2e65wse7qec",
+            "symbol": "testSymbol"
+        },
+        {
+            "id": "testdenom121221",
+            "name": "TESTDENOM121221",
+            "schema": "testschema121221",
+            "creator": "cudos1a326k254fukx9jlp0h3fwcr2ymjgludzum67dv",
+            "symbol": "testSymbol121221"
+        },
+        {
+            "id": "testdenom1212211",
+            "name": "TESTDENOM1212211",
+            "schema": "testschema1212211",
+            "creator": "cudos1a326k254fukx9jlp0h3fwcr2ymjgludzum67dv",
+            "symbol": "testSymbol1212211"
+        },
+        {
+            "id": "testdenom9",
+            "name": "TESTDENOM9",
+            "schema": "testschema9",
+            "creator": "cudos1a326k254fukx9jlp0h3fwcr2ymjgludzum67dv",
+            "symbol": "testSymbol9"
+        },
+        {
+            "id": "testdenom98",
+            "name": "TESTDENOM98",
+            "schema": "testschema98",
+            "creator": "cudos1a326k254fukx9jlp0h3fwcr2ymjgludzum67dv",
+            "symbol": "testSymbol98"
+        },
+        {
+            "id": "testdenom987",
+            "name": "TESTDENOM987",
+            "schema": "testschema987",
+            "creator": "cudos1a326k254fukx9jlp0h3fwcr2ymjgludzum67dv",
+            "symbol": "testSymbol987"
+        },
+        {
+            "id": "testdenom9876",
+            "name": "TESTDENOM9876",
+            "schema": "testschema9876",
+            "creator": "cudos1a326k254fukx9jlp0h3fwcr2ymjgludzum67dv",
+            "symbol": "testSymbol9876"
+        },
+        {
+            "id": "testdenom98765",
+            "name": "TESTDENOM98765",
+            "schema": "testschema98765",
+            "creator": "cudos1a326k254fukx9jlp0h3fwcr2ymjgludzum67dv",
+            "symbol": "testSymbol98765"
+        },
+        {
+            "id": "testdenom987654",
+            "name": "TESTDENOM987654",
+            "schema": "testschema987654",
+            "creator": "cudos1a326k254fukx9jlp0h3fwcr2ymjgludzum67dv",
+            "symbol": "testSymbol987654"
+        },
+        {
+            "id": "testdenom9876543",
+            "name": "TESTDENOM9876543",
+            "schema": "testschema9876543",
+            "creator": "cudos1a326k254fukx9jlp0h3fwcr2ymjgludzum67dv",
+            "symbol": "testSymbol9876543"
+        },
+        {
+            "id": "testdenom98765432",
+            "name": "TESTDENOM98765432",
+            "schema": "testschema98765432",
+            "creator": "cudos1a326k254fukx9jlp0h3fwcr2ymjgludzum67dv",
+            "symbol": "testSymbol98765432"
+        },
+        {
+            "id": "testdenom987654321",
+            "name": "TESTDENOM987654321",
+            "schema": "testschema987654321",
+            "creator": "cudos1a326k254fukx9jlp0h3fwcr2ymjgludzum67dv",
+            "symbol": "testSymbol987654321"
+        },
+        {
+            "id": "testdenomnew",
+            "name": "newdenom",
+            "schema": "testnftschema",
+            "creator": "cudos17h6h89mm5jxhxjsqjlxths8g8f5xhw40drmjgq",
+            "symbol": "tnft"
+        },
+        {
+            "id": "testdenomtwo",
+            "name": "ggt",
+            "schema": "",
+            "creator": "cudos1knf0flyucc2ut40cg8tn48sp70p2e65wse7qec",
+            "symbol": "gtf"
+        },
+        {
+            "id": "testing",
+            "name": "A test collection",
+            "schema": "",
+            "creator": "cudos132g6nalzpjzwvv7z0uzsyagf7228u84mgdnh4t",
+            "symbol": "test2"
+        },
+        {
+            "id": "testnft",
+            "name": "TestNFT",
+            "schema": "tnft/token",
+            "creator": "cudos16lqnrmzlx79spad3xvnqfj584frmqzeejd6r7r",
+            "symbol": "testNFT"
+        },
+        {
+            "id": "testnft45",
+            "name": "test nft 45",
+            "schema": "testnft/2/token",
+            "creator": "cudos16lqnrmzlx79spad3xvnqfj584frmqzeejd6r7r",
+            "symbol": "tnft45"
+        },
+        {
+            "id": "testtestdenom",
+            "name": "TESTDENOM2",
+            "schema": "",
+            "creator": "cudos1knf0flyucc2ut40cg8tn48sp70p2e65wse7qec",
+            "symbol": "test2Symbol"
+        },
+        {
+            "id": "theadmnftcollection",
+            "name": "The ADM NFT COllection",
+            "schema": "",
+            "creator": "cudos1a0gdnlchyh5flrtqmvvpdcxf3tk5kgngk080fv",
+            "symbol": "symtheadmnftcollection"
+        },
+        {
+            "id": "whatever",
+            "name": "whatever",
+            "schema": "",
+            "creator": "cudos1knf0flyucc2ut40cg8tn48sp70p2e65wse7qec",
+            "symbol": "whatever"
+        },
+        {
+            "id": "whfourth",
+            "name": "WHDenom4",
+            "schema": "schema4",
+            "creator": "cudos10s8vcnwqwmcc77827dvl08qcrd3elgdfe893mf",
+            "symbol": "WHD4"
+        },
+        {
+            "id": "whnfts",
+            "name": "WH-NFTs",
+            "schema": "schema1",
+            "creator": "cudos10s8vcnwqwmcc77827dvl08qcrd3elgdfe893mf",
+            "symbol": "WHNFT"
+        },
+        {
+            "id": "whsecond",
+            "name": "WH-Second-Denom",
+            "schema": "schema2",
+            "creator": "cudos10s8vcnwqwmcc77827dvl08qcrd3elgdfe893mf",
+            "symbol": "WHSD"
+        },
+        {
+            "id": "whthird",
+            "name": "WHDenom3",
+            "schema": "schema3",
+            "creator": "cudos10s8vcnwqwmcc77827dvl08qcrd3elgdfe893mf",
+            "symbol": "WHD3"
+        },
+        {
+            "id": "yetanotherdenom",
+            "name": "created with some other account new",
+            "schema": "",
+            "creator": "cudos1nj49l56x7sss5hqyvfmctxr3mq64whg273g3x5",
+            "symbol": "symyetanotherdenom"
+        },
+        {
+            "id": "yetanotherdenomagain",
+            "name": "created with some other account new2",
+            "schema": "",
+            "creator": "cudos1nj49l56x7sss5hqyvfmctxr3mq64whg273g3x5",
+            "symbol": "symyetanotherdenomagain"
+        }
+    ],
+    "pagination": {
+        "total": {
+            "low": 69,
+            "high": 0,
+            "unsigned": true
+        },
+        "nextKey": {}
+    }
+}

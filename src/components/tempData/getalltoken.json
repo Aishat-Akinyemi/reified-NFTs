@@ -1,0 +1,45 @@
+{
+    "collection": {
+        "denom": {
+            "id": "testdenom",
+            "name": "TESTDENOM",
+            "schema": "testschema",
+            "creator": "cudos1knf0flyucc2ut40cg8tn48sp70p2e65wse7qec",
+            "symbol": "testSymbol"
+        },
+        "nfts": [
+            {
+                "id": "1",
+                "name": "testtoken",
+                "uri": "",
+                "data": "testData",
+                "owner": "cudos1knf0flyucc2ut40cg8tn48sp70p2e65wse7qec",
+                "approvedAddresses": []
+            },
+            {
+                "id": "2",
+                "name": "",
+                "uri": "",
+                "data": "",
+                "owner": "cudos1knf0flyucc2ut40cg8tn48sp70p2e65wse7qec",
+                "approvedAddresses": []
+            },
+            {
+                "id": "3",
+                "name": "",
+                "uri": "",
+                "data": "",
+                "owner": "cudos1knf0flyucc2ut40cg8tn48sp70p2e65wse7qec",
+                "approvedAddresses": []
+            }
+        ]
+    },
+    "pagination": {
+        "total": {
+            "low": 3,
+            "high": 0,
+            "unsigned": true
+        },
+        "nextKey": {}
+    }
+}

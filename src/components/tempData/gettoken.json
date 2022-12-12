@@ -1,0 +1,10 @@
+{
+    "nft": {
+        "id": "1",
+        "name": "testtoken",
+        "uri": "",
+        "data": "testData",
+        "owner": "cudos1knf0flyucc2ut40cg8tn48sp70p2e65wse7qec",
+        "approvedAddresses": []
+    }
+}
