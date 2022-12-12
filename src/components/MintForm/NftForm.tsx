@@ -42,11 +42,11 @@ export type NftFormProps = {
   account:AccountDetails|null
   mintNft: (mintMessage: MintMessage) => Promise<string| undefined>
   denomId: string|undefined
-  setIsMintingNFTFailed: any
+  setIsMintingNFTSucceed: any
 
 }
 
-export const NftForm = ({mintNft, account, denomId, setIsMintingNFTFailed}: NftFormProps) => {
+export const NftForm = ({mintNft, account, denomId, setIsMintingNFTSucceed}: NftFormProps) => {
   const { enqueueSnackbar } = useSnackbar();
     // ? Default Values
   const defaultValues: INFT = {
@@ -76,9 +76,9 @@ export const NftForm = ({mintNft, account, denomId, setIsMintingNFTFailed}: NftF
           chainId: import.meta.env.VITE_APP_CHAIN_ID
         }      
       await mintNft(mintMsg);
+      setIsMintingNFTSucceed(true);
     }  
-    else { 
-      setIsMintingNFTFailed(true);
+    else {       
       throw new Error("Please Connect your Keplr Wallet");
   }
   };

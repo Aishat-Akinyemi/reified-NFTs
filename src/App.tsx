@@ -52,9 +52,8 @@ function App() {
       try {
          if(isConnected){
             await nftSingingClient?.issueDenom(denomMessage);
-            enqueueSnackbar('Collection Created', {
-              variant: 'success'
-            })
+            enqueueSnackbar('Collection Created', { variant: 'success'
+                          });
             return denomMessage.id;
          }
          else throw new Error("Keplr Wallet not connected");         
@@ -71,13 +70,11 @@ function App() {
     if(isConnected){
        await nftSingingClient?.mintNFT(mintMessage);
        enqueueSnackbar('NFT Minted', {
-        variant: 'success'
-      })
-       return mintMessage.denomId;
+        variant: 'success' })
+        return mintMessage.denomId;       
     }
     else throw new Error("Keplr Wallet not connected");         
  } catch (error: any) {
-   console.log(error);
    enqueueSnackbar(error.message, {
      variant: 'error'
    })

@@ -66,9 +66,10 @@ export type DenomFormProps = {
   createDenom: (denom: IssueMessage) =>Promise<string | undefined>
   account: AccountDetails | null,
   setDenom: any,
-  setIsCreatingCollectionFailed: any
+  setIsCreatingCollectionSucceed: any,
+  setNextStep: any
 }
-export const DenomForm = ({createDenom, account, setDenom, setIsCreatingCollectionFailed}: DenomFormProps) => {
+export const DenomForm = ({createDenom, account, setDenom, setIsCreatingCollectionSucceed, setNextStep}: DenomFormProps) => {
   const { enqueueSnackbar } = useSnackbar();
     // ? Default Values
   const defaultValues: IDenom = {
@@ -98,9 +99,11 @@ export const DenomForm = ({createDenom, account, setDenom, setIsCreatingCollecti
       } 
       let successReturnsDenom = await createDenom(denom);
       setDenom(successReturnsDenom);
+      setIsCreatingCollectionSucceed(true);
+      setNextStep();
     }  
     else { 
-      setIsCreatingCollectionFailed(true);
+      setIsCreatingCollectionSucceed(false);
       throw new Error("Please Connect your Keplr Wallet");
   }
     
