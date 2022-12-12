@@ -35,12 +35,13 @@
     }
 
     export interface IssueMessage {
-        denomId: string;
+        id: string;
         name: string;
         symbol: string;
         from: string;
         schema: string;
         chainId: string;
+        sender: string
     }
     
 
