@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import DiamondIcon from '@mui/icons-material/Diamond';
 import { AccountDetails } from "../../ledgers/KeplrLedger";
+import {  useNavigate} from 'react-router-dom';
 
 const pages = ["Assets", "Mint"];
 const settings = ["Logout"];
@@ -25,6 +26,13 @@ interface NavProps {
 }
 
 function Nav({connect, account, disconnect, isConnected}: NavProps) {
+  let navigate = useNavigate();
+  const goToCollection = ()=> {
+    if(account) {
+      handleCloseNavMenu();
+      navigate('/collections');
+    }
+  }
   
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -42,7 +50,6 @@ function Nav({connect, account, disconnect, isConnected}: NavProps) {
   };
 
   const handleCloseNavMenu = () => {
-    console.log(`www`);
     setAnchorElNav(null);
   };
 
@@ -103,11 +110,15 @@ function Nav({connect, account, disconnect, isConnected}: NavProps) {
                         display: { xs: "block", md: "none" }
                     }}
                     >
-                    {pages.map((page) => (
-                        <MenuItem key={page} onClick={handleCloseNavMenu}>
-                        <Typography textAlign="center">{page}</Typography>
+                    
+                        <MenuItem onClick={goToCollection}>
+                        <Typography textAlign="center">Assets</Typography>
                         </MenuItem>
-                    ))}
+
+                        <MenuItem onClick={handleCloseNavMenu}>
+                        <Typography textAlign="center">Mint</Typography>
+                        </MenuItem>
+                     
                     </Menu>
                 </Box>
                 <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -152,13 +163,11 @@ function Nav({connect, account, disconnect, isConnected}: NavProps) {
             {isConnected 
             ?
             <>
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar sx={{ bgcolor: 'text.secondary', width: 48, height: 48, borderColor: 'primary'}} sizes="md" aria-label="symbol">
-                  <Typography sx={{fontSize: 10, fontWeight:'bold'}}>
-                      {(account!.username.substring(0, 5)).toLocaleUpperCase()}
+                <Button onClick={handleOpenUserMenu} color="secondary" variant="contained">
+                  <Typography>
+                        {(account!.username.substring(0, 10)).toLocaleUpperCase()}
                   </Typography>
-                </Avatar>
-                </IconButton>
+                </Button>
 
                 <Menu
                 sx={{ mt: "45px" }}

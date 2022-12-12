@@ -11,11 +11,10 @@ import { Routes, Route, useNavigate} from 'react-router-dom';
 import { Home } from './Pages/Home/Home';
 import Nav from './components/Nav/Nav';
 import { NftClient, NftQueryClient } from './ledgers/NftClient';
-import { CudosSigningStargateClient } from 'cudosjs/build/stargate/cudos-signingstargateclient';
 import { keplrSigningClient, getConnectedAccount, AccountDetails } from './ledgers/KeplrLedger';
+import { CollectioList } from './components/Collection/CollectionList';
 
-function App() {
-  
+function App() {  
   const [nftSingingClient, setNftSigningClient] = useState<NftClient | null>(null);
   const [isConnected, setIsConnected] = useState<boolean>(false)
   const [account, setAccount] = useState<AccountDetails| null>(null)
@@ -30,12 +29,6 @@ function App() {
       setIsConnected(false);
     }
   }
-
-  useEffect(() => {
-    (async () => {
-       console.log(await nftQueryClient.getAllDenoms());
-    })();
-  }, [])
   const connectWallet = async() => {
       try{
         const cudosSigningStargateClient =  await keplrSigningClient();        
@@ -49,16 +42,22 @@ function App() {
           });
       } 
   }
-
+  const x = nftQueryClient.getAllDenoms();
 
   return (
   
-       <Box sx={{ width: 1 }} >
+       <Box sx={{ width: 1 }} >      
         <ThemeProvider theme={theme}>        
           <CssBaseline/>
           <Box sx={{display:'flex', flexDirection:'column'}}>
               <Nav connect={connectWallet} disconnect={disconnect} account={account} isConnected={isConnected}/>
-              <Home/>          
+              <Routes>
+                <Route path='/' element={<Home/>}/>
+                {/* <Route path='/collections/:denomId' element={<Submission user={user} />}/> */}
+                <Route path='/collections' element={<CollectioList getDenom={nftQueryClient.getAllDenoms()} account={account} />}/>
+                {/* <Route path='/' element={}/> */}
+                <Route path='*' element={<Home/>}/>
+            </Routes>         
           </Box>
         </ThemeProvider>
       </Box>
