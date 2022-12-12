@@ -15,8 +15,6 @@ import DiamondIcon from '@mui/icons-material/Diamond';
 import { AccountDetails } from "../../ledgers/KeplrLedger";
 import {  useNavigate} from 'react-router-dom';
 
-const pages = ["Assets", "Mint"];
-const settings = ["Logout"];
 
 interface NavProps {
   connect: () => Promise<void>,
@@ -31,6 +29,12 @@ function Nav({connect, account, disconnect, isConnected}: NavProps) {
     if(account) {
       handleCloseNavMenu();
       navigate('/collections');
+    }
+  }
+  const goToMintPage = ()=> {
+    handleCloseNavMenu();
+    if(account !==null) {            
+      navigate('/mint');
     }
   }
   
@@ -58,8 +62,8 @@ function Nav({connect, account, disconnect, isConnected}: NavProps) {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <AppBar position="fixed"  sx={{height: '5em', backgroundColor: 'primary.dark', marginBottom:'5em'}}>
+      <Container maxWidth="xl" >
         <Toolbar disableGutters>
           <DiamondIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
@@ -115,7 +119,10 @@ function Nav({connect, account, disconnect, isConnected}: NavProps) {
                         <Typography textAlign="center">Assets</Typography>
                         </MenuItem>
 
-                        <MenuItem onClick={handleCloseNavMenu}>
+                        <MenuItem onClick={(event) => {
+                          event.preventDefault();
+                          goToMintPage();
+                        }}>
                         <Typography textAlign="center">Mint</Typography>
                         </MenuItem>
                      
@@ -145,15 +152,20 @@ function Nav({connect, account, disconnect, isConnected}: NavProps) {
             {   
                 isConnected &&
                 <>
-                {pages.map((page) => (
                 <Button
-                    key={page}
-                    onClick={handleCloseNavMenu}
+                    onClick={goToCollection}
                     sx={{ my: 2, color: "white", display: "block" }}
                 >
-                    {page}
+                    Assets
                 </Button>
-                ))}
+                
+                <Button
+                onClick={goToMintPage}
+                sx={{ my: 2, color: "white", display: "block" }}
+                >
+                    Mint
+                </Button>
+                
                 </>
             }
             
@@ -185,14 +197,12 @@ function Nav({connect, account, disconnect, isConnected}: NavProps) {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
                 >
-                {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={(e)=> {
+                  <MenuItem onClick={(e)=> {
                       handleCloseUserMenu();
                       disconnect();
                     }}>
-                    <Typography textAlign="center">{setting}</Typography>
+                    <Typography textAlign="center">Disconnect</Typography>
                     </MenuItem>
-                ))}
                 </Menu>
             </>            
             :

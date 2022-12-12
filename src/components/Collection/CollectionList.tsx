@@ -5,7 +5,6 @@ import { AccountDetails } from '../../ledgers/KeplrLedger'
 import { Collection } from './Collection'
 import reified from '../../assets/reified.png'
 import { Denom } from '../../types/nft'
-import { padding } from '@mui/system'
 
 type CollectioListProps  = {
     getDenom:  Promise<QueryDenomsResponse>
@@ -19,8 +18,7 @@ export const CollectioList = ({getDenom, account}: CollectioListProps) => {
             setFilteredDenom(
                 resp?.denoms.filter(denom => denom.creator == account?.address)
                 ?? []                    
-                ) ;   
-                       
+                ) ;    
         })();    
     }, []);    
 
@@ -52,9 +50,7 @@ export const CollectioList = ({getDenom, account}: CollectioListProps) => {
           </Card>
              
           )
-    }
-
-    
+    }    
   return (
     <Box sx={{p: 2, bgcolor: 'background.paper'}}>  
         <Box sx={{ my: 5, mx: 3 }}>
