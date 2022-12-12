@@ -89,8 +89,7 @@ export const DenomForm = () => {
   return (
     <Container
       maxWidth={false}
-      sx={{ height: '100%', backgroundColor: { xs: '#fff', md: '#f4f4f4' } }}
-    >
+      sx={{ height: '100%', backgroundColor: { xs: '#fff', md: '#f4f4f4' }, width: '40em' }}    >
           <FormProvider {...methods}>
             {/* <Grid
               container
@@ -108,6 +107,7 @@ export const DenomForm = () => {
                     autoComplete='off'
                     sx={{ py: '6rem',
                         px: '1rem',
+                        width: '50vw'
 
                     }}
                     onSubmit={(e) => {

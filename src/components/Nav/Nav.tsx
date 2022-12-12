@@ -7,10 +7,8 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import DiamondIcon from '@mui/icons-material/Diamond';
 import { AccountDetails } from "../../ledgers/KeplrLedger";
 import {  useNavigate} from 'react-router-dom';
@@ -70,7 +68,7 @@ function Nav({connect, account, disconnect, isConnected}: NavProps) {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href=""
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -80,12 +78,16 @@ function Nav({connect, account, disconnect, isConnected}: NavProps) {
               color: "inherit",
               textDecoration: "none"
             }}
+            onClick={(e)=>{
+              e.preventDefault()
+              navigate('/')}}
           >
             REIFIED
-          </Typography>
+          </Typography>          
             
-            
-                <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+                {
+                  isConnected &&
+                  <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                     <IconButton
                     size="large"
                     aria-label="account of current user"
@@ -127,8 +129,10 @@ function Nav({connect, account, disconnect, isConnected}: NavProps) {
                         </MenuItem>
                      
                     </Menu>
-                </Box>
-                <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+                  </Box>
+                }
+
+                <DiamondIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
                 <Typography
                     variant="h5"
                     noWrap
@@ -157,15 +161,13 @@ function Nav({connect, account, disconnect, isConnected}: NavProps) {
                     sx={{ my: 2, color: "white", display: "block" }}
                 >
                     Assets
-                </Button>
-                
+                </Button>                
                 <Button
                 onClick={goToMintPage}
                 sx={{ my: 2, color: "white", display: "block" }}
                 >
                     Mint
-                </Button>
-                
+                </Button>                
                 </>
             }
             

@@ -63,7 +63,7 @@ export const NftForm = () => {
   return (
     <Container
       
-      sx={{ height: '100%', backgroundColor: 'text.secondary'}}
+      sx={{ height: '100%', backgroundColor: 'text.secondary', width:'40em'}}
     >
           <FormProvider {...methods}>
               <Box
@@ -121,8 +121,9 @@ export const NftForm = () => {
                       control={
                         <Checkbox
                           size='small'
-                          aria-label='mint for someone else checkbox'
-                          required
+                          aria-label='mint for someone else checkbox'                          
+                          sx={{outline: '1px solid #576b92'}}
+                          color='secondary'
                           {...methods.register('mintForAnotherAddress', {
                             onChange: (e) => {
                                 if(currentAccountIsRecipient) {
@@ -140,9 +141,11 @@ export const NftForm = () => {
                         <Typography
                           variant='body2'
                           sx={{
-                            fontSize: '0.8rem',
+                            fontSize: '1rem',
                             fontWeight: 400,
                             color: '#5e5b5d',
+                            padding: '1rem'
+
                           }}
                         >
                           Mint NFT to a Separate Address

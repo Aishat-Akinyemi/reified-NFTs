@@ -14,7 +14,7 @@ import { NftClient, NftQueryClient } from './ledgers/NftClient';
 import { keplrSigningClient, getConnectedAccount, AccountDetails } from './ledgers/KeplrLedger';
 import { CollectioList } from './components/Collection/CollectionList';
 import { NftList } from './components/Nft/NftList';
-import Mint from './components/MintForm/Mint';
+import {Mint} from './components/MintForm/Mint';
 
 function App() {  
   const [nftSingingClient, setNftSigningClient] = useState<NftClient | null>(null);

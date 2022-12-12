@@ -9,8 +9,7 @@ type CollectionProps = {
 }
 
 export const Collection = ({denom}:CollectionProps) => {  
-    let navigate = useNavigate();
-    
+    let navigate = useNavigate();    
     
   return (
     <Box>
