@@ -18,6 +18,8 @@ import {
 import { Denom, MintMessage, Nft } from '../../types/nft';
 import { border } from '@mui/system';
 import { useState } from 'react';
+import { AccountDetails } from '../../ledgers/KeplrLedger';
+import { useSnackbar } from 'notistack';
   
 // ? nft form Schema with Zod
 const nftFormSchema = object({
@@ -36,7 +38,16 @@ const nftFormSchema = object({
 // ? Infer the Schema to get the TS Type
 type INFT = TypeOf<typeof nftFormSchema>;
 
-export const NftForm = () => {
+export type NftFormProps = {
+  account:AccountDetails|null
+  mintNft: (mintMessage: MintMessage) => Promise<string| undefined>
+  denomId: string|undefined
+  setIsMintingNFTFailed: any
+
+}
+
+export const NftForm = ({mintNft, account, denomId, setIsMintingNFTFailed}: NftFormProps) => {
+  const { enqueueSnackbar } = useSnackbar();
     // ? Default Values
   const defaultValues: INFT = {
     name: '',  
@@ -53,9 +64,23 @@ export const NftForm = () => {
   });
 
   // ? Submit Handler
-  const onSubmitHandler: SubmitHandler<INFT> = (values: INFT) => {
-    console.log(methods.getValues('mintForAnotherAddress'))    
-    console.log(values);    
+  const onSubmitHandler: SubmitHandler<INFT> = async (values: INFT) => {
+    if(account?.address && denomId){
+        const mintMsg: MintMessage  = {
+          denomId: denomId,
+          name: values.name,
+          uri: values.uri,
+          data: values.data ?? '',
+          from: account.address,
+          recipient: values.mintForAnotherAddress ? values.recipient : account.address,
+          chainId: import.meta.env.VITE_APP_CHAIN_ID
+        }      
+      await mintNft(mintMsg);
+    }  
+    else { 
+      setIsMintingNFTFailed(true);
+      throw new Error("Please Connect your Keplr Wallet");
+  }
   };
 
   const [currentAccountIsRecipient, setCurrentAccountIsRecipient] =useState(true);
@@ -63,7 +88,7 @@ export const NftForm = () => {
   return (
     <Container
       
-      sx={{ height: '100%', backgroundColor: 'text.secondary'}}
+      sx={{ height: '100%', backgroundColor: 'text.secondary', width:'40em'}}
     >
           <FormProvider {...methods}>
               <Box
@@ -79,7 +104,9 @@ export const NftForm = () => {
                     onSubmit={(e) => {
                         methods.handleSubmit(onSubmitHandler)(e)
                         .catch((error) => {
-                            alert(error);
+                          enqueueSnackbar(error.message, {
+                            variant: 'error'
+                          })
                         })
                     }}
                   >
@@ -121,8 +148,9 @@ export const NftForm = () => {
                       control={
                         <Checkbox
                           size='small'
-                          aria-label='mint for someone else checkbox'
-                          required
+                          aria-label='mint for someone else checkbox'                          
+                          sx={{outline: '1px solid #576b92'}}
+                          color='secondary'
                           {...methods.register('mintForAnotherAddress', {
                             onChange: (e) => {
                                 if(currentAccountIsRecipient) {
@@ -140,9 +168,11 @@ export const NftForm = () => {
                         <Typography
                           variant='body2'
                           sx={{
-                            fontSize: '0.8rem',
+                            fontSize: '1rem',
                             fontWeight: 400,
                             color: '#5e5b5d',
+                            padding: '1rem'
+
                           }}
                         >
                           Mint NFT to a Separate Address

@@ -7,17 +7,35 @@ import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
 import DiamondIcon from '@mui/icons-material/Diamond';
+import { AccountDetails } from "../../ledgers/KeplrLedger";
+import {  useNavigate} from 'react-router-dom';
 
-const pages = ["Assets", "Mint"];
-const settings = ["Logout"];
 
-function Nav() {
-    const isWalletConnected = false;
+interface NavProps {
+  connect: () => Promise<void>,
+  account: AccountDetails | null,
+  disconnect: () => void,
+  isConnected: boolean
+}
+
+function Nav({connect, account, disconnect, isConnected}: NavProps) {
+  let navigate = useNavigate();
+  const goToCollection = ()=> {
+    if(account) {
+      handleCloseNavMenu();
+      navigate('/collections');
+    }
+  }
+  const goToMintPage = ()=> {
+    handleCloseNavMenu();
+    if(account !==null) {            
+      navigate('/mint');
+    }
+  }
+  
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -30,6 +48,7 @@ function Nav() {
   };
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
+   
   };
 
   const handleCloseNavMenu = () => {
@@ -41,15 +60,15 @@ function Nav() {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <AppBar position="fixed"  sx={{height: '5em', backgroundColor: 'primary.dark', marginBottom:'5em'}}>
+      <Container maxWidth="xl" >
         <Toolbar disableGutters>
           <DiamondIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href=""
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -59,12 +78,16 @@ function Nav() {
               color: "inherit",
               textDecoration: "none"
             }}
+            onClick={(e)=>{
+              e.preventDefault()
+              navigate('/')}}
           >
             REIFIED
-          </Typography>
+          </Typography>          
             
-            
-                <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+                {
+                  isConnected &&
+                  <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
                     <IconButton
                     size="large"
                     aria-label="account of current user"
@@ -93,14 +116,23 @@ function Nav() {
                         display: { xs: "block", md: "none" }
                     }}
                     >
-                    {pages.map((page) => (
-                        <MenuItem key={page} onClick={handleCloseNavMenu}>
-                        <Typography textAlign="center">{page}</Typography>
+                    
+                        <MenuItem onClick={goToCollection}>
+                        <Typography textAlign="center">Assets</Typography>
                         </MenuItem>
-                    ))}
+
+                        <MenuItem onClick={(event) => {
+                          event.preventDefault();
+                          goToMintPage();
+                        }}>
+                        <Typography textAlign="center">Mint</Typography>
+                        </MenuItem>
+                     
                     </Menu>
-                </Box>
-                <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
+                  </Box>
+                }
+
+                <DiamondIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
                 <Typography
                     variant="h5"
                     noWrap
@@ -122,29 +154,34 @@ function Nav() {
                 <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
 
             {   
-                isWalletConnected &&
+                isConnected &&
                 <>
-                {pages.map((page) => (
                 <Button
-                    key={page}
-                    onClick={handleCloseNavMenu}
+                    onClick={goToCollection}
                     sx={{ my: 2, color: "white", display: "block" }}
                 >
-                    {page}
-                </Button>
-                ))}
+                    Assets
+                </Button>                
+                <Button
+                onClick={goToMintPage}
+                sx={{ my: 2, color: "white", display: "block" }}
+                >
+                    Mint
+                </Button>                
                 </>
             }
             
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            {isWalletConnected 
+            {isConnected 
             ?
             <>
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
+                <Button onClick={handleOpenUserMenu} color="secondary" variant="contained">
+                  <Typography>
+                        {(account!.username.substring(0, 10)).toLocaleUpperCase()}
+                  </Typography>
+                </Button>
 
                 <Menu
                 sx={{ mt: "45px" }}
@@ -162,15 +199,16 @@ function Nav() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
                 >
-                {settings.map((setting) => (
-                    <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
+                  <MenuItem onClick={(e)=> {
+                      handleCloseUserMenu();
+                      disconnect();
+                    }}>
+                    <Typography textAlign="center">Disconnect</Typography>
                     </MenuItem>
-                ))}
                 </Menu>
             </>            
             :
-            <Button color="secondary" variant="contained">Connect Wallet</Button>
+            <Button color="secondary" variant="contained" onClick={connect}>Connect Wallet</Button>
             }
           </Box>
         </Toolbar>
