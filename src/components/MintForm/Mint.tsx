@@ -11,6 +11,7 @@ import { DenomForm, DenomFormProps } from "./DenomForm";
 import { NftForm, NftFormProps } from "./NftForm";
 import { IssueMessage, MintMessage } from "../../types/nft";
 import { AccountDetails } from "../../ledgers/KeplrLedger";
+import { useNavigate } from "react-router-dom";
 
 const steps = ["Create Collection", "Mint NFT for an Asset"];
 type MintProps = {
@@ -23,6 +24,7 @@ export const Mint = ({account, createDenom, mintNft}: MintProps) => {
   const [denomId, setDenomId] = useState<string | undefined>();
   const [isCreatingCollectionSucceed, setIsCreatingCollectionSucceed] = useState(false);  
   const [isMintingNFTFSucceed, setIsMintingNFTSucceed] = useState(false);  
+  let navigate = useNavigate();  
 
   const handleReset = () => {
     setActiveStep(0);
@@ -75,7 +77,9 @@ export const Mint = ({account, createDenom, mintNft}: MintProps) => {
                   <Box sx={{ flex: "1 1 auto" }} />
                   <Button onClick={handleBack}>Create A New Collection</Button>
                   <Box sx={{ flex: "1 1 auto" }} />
-                  <Button onClick={}>View Assets List</Button>
+                  <Button onClick={() => {
+                        navigate(`/collections`, {state:denom.id})
+                    }}>View Your Collections</Button>
                 </Box>
               </React.Fragment>
             ) }
