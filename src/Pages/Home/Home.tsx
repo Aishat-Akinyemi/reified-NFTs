@@ -5,7 +5,7 @@ import reified from '../../assets/reified.png'
 
 export const Home = () => {
   return (
-    <Card sx={{ display: 'flex', width: '90vW', height:'90vH'}}>
+    <Card sx={{ display: 'flex', height:'100vh'}}>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
         <CardContent sx={{ flex: '1', width: '40vW', padding: 5}}>
           <Typography component="div" variant="h2" sx={{padding: 5}}>
