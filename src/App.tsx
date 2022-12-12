@@ -93,12 +93,10 @@ function App() {
               <Nav connect={connectWallet} disconnect={disconnect} account={account} isConnected={isConnected}/>
               <Box sx={{paddingTop: '5em'}}>
                 <Routes>
-                  <Route path='/' element={<Home/>}/>
-                  {/* <Route path='/collections/:denomId' element={<Submission user={user} />}/> */}
+                  <Route path='/' element={<Home/>}/>                  
                   <Route path='/collections' element={<CollectioList getDenom={nftQueryClient.getAllDenoms()} account={account} />}/>
-                  <Route path='/assets' element={<NftList getNft={getAllNftsById} account={account}/>}/>
-                  <Route path='/mint' element={<Mint createDenom={createDenom} mintNft={mintNft} account={account}/>}/>
-                  <Route path='*' element={<Home/>}/>
+                  <Route path='/assets/:denomId' element={<NftList getNft={getAllNftsById} account={account}/>}/>
+                  <Route path='/mint' element={<Mint createDenom={createDenom} mintNft={mintNft} account={account}/>}/>                 
               </Routes>
               </Box>         
           </Box>

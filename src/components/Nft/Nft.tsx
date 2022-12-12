@@ -7,11 +7,11 @@ import { ApprovedAddress } from './ApprovedAddress';
 // export const NFT = (nft: Token) => {
 export const Nft = () => {
     const nft = token.nft;
+    
   return (
     <Box>
         <Card sx={{ 
-            minWidth: 300, 
-            maxWidth: 500,
+            maxWidth: 400,
             height: 300,
             bgcolor: 'background.default',
             boxShadow: 1,

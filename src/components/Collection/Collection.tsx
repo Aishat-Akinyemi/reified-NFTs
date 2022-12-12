@@ -55,7 +55,7 @@ export const Collection = ({denom}:CollectionProps) => {
             subheader={
                 <Tooltip title={denom.creator}>
                     <Typography sx={{ my: 1.5, fontSize: 12 }} color="text.secondary">
-                     {`${denom.creator.substring(0, 20)}...`}
+                     {`${denom.creator.substring(0, 15)}...`}
                     </Typography>
                 </Tooltip>
             }

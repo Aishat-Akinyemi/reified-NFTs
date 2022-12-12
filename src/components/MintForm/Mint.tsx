@@ -7,9 +7,10 @@ import {
   Step, StepContent
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import reified from "../../assets/reified.png";
 import { DenomForm, DenomFormProps } from "./DenomForm";
 import { NftForm, NftFormProps } from "./NftForm";
+import { IssueMessage, MintMessage } from "../../types/nft";
+import { AccountDetails } from "../../ledgers/KeplrLedger";
 
 const steps = ["Create Collection", "Mint NFT for an Asset"];
 type labelProps = {
@@ -18,8 +19,11 @@ type labelProps = {
 };
 
 type MintProps = {
+  account:AccountDetails|null
+  mintNft: (mintMessage: MintMessage) => Promise<string| undefined>
+  createDenom: (denom: IssueMessage) =>Promise<string | undefined>
 
-} & DenomFormProps & NftFormProps;
+};
 
 export const Mint = ({account, createDenom, mintNft}: MintProps) => {
   const [activeStep, setActiveStep] = useState(0);

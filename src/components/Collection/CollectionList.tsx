@@ -6,6 +6,7 @@ import { Collection } from './Collection'
 import reified from '../../assets/reified.png'
 import { Denom } from '../../types/nft'
 
+
 type CollectioListProps  = {
     getDenom:  Promise<QueryDenomsResponse>
     account: AccountDetails|null,
@@ -52,8 +53,8 @@ export const CollectioList = ({getDenom, account}: CollectioListProps) => {
           )
     }    
   return (
-    <Box sx={{p: 2, bgcolor: 'background.paper'}}>  
-        <Box sx={{ my: 5, mx: 3 }}>
+    <Box sx={{padding: '5em', bgcolor: 'background.paper'}}>  
+        {/* <Box sx={{ padding:'2em' }}> */}
             <Grid container wrap='nowrap' direction="column" >
                 <Grid item>
                     <Typography gutterBottom variant="h5" component="div">
@@ -66,9 +67,9 @@ export const CollectioList = ({getDenom, account}: CollectioListProps) => {
                     </Typography>
                 </Grid>
             </Grid>
-        </Box>
-        <Divider></Divider>
-        <Box sx={{ flexGrow: 1, minHeight:'100vh', my:5, mx:3, padding: 3}}>
+        {/* </Box> */}
+        <Divider sx={{margin:'1em'}}></Divider>
+        <Box sx={{ flexGrow: 1, minHeight:'60vh', my:5, mx:3, padding: 3}}>
             <Grid
                 container                
                 spacing={{ xs: 2, md: 3 }} 

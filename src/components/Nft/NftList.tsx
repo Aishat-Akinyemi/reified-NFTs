@@ -21,11 +21,11 @@ export const NftList = ({getNft, account}: NftListProps) => {
 
     useEffect(() => {
         (async () => {
-            const resp = await getNft(denomId);
+            const resp = await (await getNft(denomId));
             setCollection(resp);
+            console.log(resp);
             setFilteredNFTs(                
                 resp?.collection?.nfts?.filter((nft) => nft.owner == account?.address)
-                // resp?.collection?.nfts?.filter((nft) => nft.owner == account?.address)
                 ?? []                    
                 ) ;                         
         })();    
@@ -34,10 +34,10 @@ export const NftList = ({getNft, account}: NftListProps) => {
 
     if(filteredNFT.length<1){
         return (
-            <Card sx={{ display: 'flex', width: '95vw', height:'100vh'}}>
+            <Card sx={{ display: 'flex', height:'100vh'}}>
                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                 <CardContent sx={{ flex: '1', width: '40vW', padding: 5}}>
-                <Typography gutterBottom variant="h5" component="div" sx={{padding:5}}>
+                <Typography gutterBottom variant="h4" component="div" sx={{padding:5}}>
                             You do not own any NFT in this Collection.
                 </Typography>
                     <Typography variant="h6" color="text.secondary" component="div" sx={{padding: 5}}>
@@ -60,35 +60,35 @@ export const NftList = ({getNft, account}: NftListProps) => {
           )
     }
   return (
-    <Box sx={{p: 2, bgcolor: 'background.paper'}}>  
-        <Box sx={{ my: 5, mx: 3 }}>
-            <Grid container wrap='nowrap' spacing={3} >
+    <Box sx={{padding:'5em' , bgcolor: 'background.paper'}}>  
+        {/* <Box sx={{ my: 5, mx: 3 }}> */}
+            <Grid container wrap='nowrap' >
                 <Grid item xs={8}>
                     <Typography gutterBottom variant="h5" component="div">
                         {collection?.collection?.denom?.name} Collection
                     </Typography>
                 </Grid>
                 <Grid item xs={4}>
-                    <Typography gutterBottom variant="h6" component="div">
+                    <Typography gutterBottom variant="h5" component="div">
                       Symbol:  {collection?.collection?.denom?.symbol}
                     </Typography>
                 </Grid>
             </Grid>
             <Grid container wrap='nowrap' spacing={3}  >
                 <Grid item xs={8}>
-                    <Typography color="text.secondary" variant="body2" component="div">
+                    <Typography color="text.secondary" variant="h6" component="div">
                         {collection?.collection?.denom?.schema}
                     </Typography>
                 </Grid>
                 <Grid item xs={4}>
-                    <Typography color="text.secondary" variant="body2" component="div">
-                       Count: {collection?.collection?.nfts?.length}
+                    <Typography color="text.secondary" variant="h6" component="div">
+                       Count: {filteredNFT?.length}
                     </Typography>
                 </Grid>
             </Grid>
-        </Box>
-        <Divider variant="fullWidth" sx={{m: 10, color: 'primary.dark'}}/>
-        <Box sx={{ flexGrow: 1, minHeight:'100vh', my:5, mx:3, padding: 3 }}>
+        {/* </Box> */}
+        <Divider sx={{m: '1em', color: 'primary.dark'}}/>
+        <Box sx={{ flexGrow: 1, minHeight:'60vh', my:5, mx:3, padding: 3 }}>
             <Grid
                 container                
                 spacing={{ xs: 2, md: 3 }} 
