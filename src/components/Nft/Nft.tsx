@@ -12,6 +12,7 @@ export const Nft = () => {
         <Card sx={{ 
             minWidth: 300, 
             maxWidth: 500,
+            height: 300,
             bgcolor: 'background.default',
             boxShadow: 1,
             borderRadius: 5,
