@@ -1,3 +1,10 @@
+# Reified NFTs
+
+Reified is a PoC for a product where users can easily trigger the creation of NFTs that represent real world assets on Cudos Testnet.
+
+Built with React, Typescript, Cudosjs.
+
+
 Here is a sample .env content.
 
 VITE_NETWORK='LOCAL' || 'TESTNET'
