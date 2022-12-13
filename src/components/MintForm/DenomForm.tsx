@@ -16,6 +16,7 @@ import { NftQueryClient } from '../../ledgers/NftClient';
 import { account } from '@cosmostation/extension-client/aptos';
 import { AccountDetails } from '../../ledgers/KeplrLedger';
 import { useSnackbar } from 'notistack';
+import { useState } from 'react';
 
 const nftQueryClient = new NftQueryClient();
   
@@ -70,6 +71,7 @@ export type DenomFormProps = {
   setNextStep: any
 }
 export const DenomForm = ({createDenom, account, setDenom, setIsCreatingCollectionSucceed, setNextStep}: DenomFormProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
     // ? Default Values
   const defaultValues: IDenom = {
@@ -134,12 +136,14 @@ export const DenomForm = ({createDenom, account, setDenom, setIsCreatingCollecti
 
                     }}
                     onSubmit={(e) => {
+                      setIsLoading(true)
                         methods.handleSubmit(onSubmitHandler)(e)
                         .catch((error:any) => {
                           enqueueSnackbar(error.message, {
                             variant: 'error'
                           })
                         })
+                        .finally(()=>setIsLoading(false))
                     }}
                   >
                     <Typography
@@ -180,7 +184,7 @@ export const DenomForm = ({createDenom, account, setDenom, setIsCreatingCollecti
                     />
 
                     <LoadingButton
-                      loading={false}
+                      loading={isLoading}
                       type='submit'
                       variant='contained'
                       sx={{
@@ -190,7 +194,7 @@ export const DenomForm = ({createDenom, account, setDenom, setIsCreatingCollecti
                         marginInline: 'auto',
                       }}
                     >
-                      Creating Collection
+                      Create Collection
                     </LoadingButton>
                   </Box>            
             {/* </Grid> */}

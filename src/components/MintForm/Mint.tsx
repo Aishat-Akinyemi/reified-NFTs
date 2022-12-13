@@ -34,7 +34,6 @@ export const Mint = ({account, createDenom, mintNft}: MintProps) => {
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
     setIsMintingNFTSucceed(false);
   };
 
@@ -73,12 +72,10 @@ export const Mint = ({account, createDenom, mintNft}: MintProps) => {
                 </Typography>
                 <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
                   <Box sx={{ flex: "1 1 auto" }} />
-                  <Button onClick={handleReset}> Add Another NFT to Collection</Button>
+                  <Button onClick={handleReset} variant="contained">Create A New Collection</Button>
                   <Box sx={{ flex: "1 1 auto" }} />
-                  <Button onClick={handleBack}>Create A New Collection</Button>
-                  <Box sx={{ flex: "1 1 auto" }} />
-                  <Button onClick={() => {
-                        navigate(`/collections`, {state:denom.id})
+                  <Button variant="contained" onClick={() => {
+                        navigate(`/collections`)
                     }}>View Your Collections</Button>
                 </Box>
               </React.Fragment>

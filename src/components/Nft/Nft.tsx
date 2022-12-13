@@ -59,8 +59,8 @@ export const Nft = () => {
             </Typography>
         </CardContent>
         <CardActions disableSpacing>
-            <Tooltip title="View NFTs in Collection">
-                <IconButton aria-label="View Collection">
+            <Tooltip title={nft.uri}>
+                <IconButton aria-label="Url">
                 <OpenInFullRounded color='primary'/>
                 </IconButton> 
             </Tooltip>                       

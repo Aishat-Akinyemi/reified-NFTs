@@ -8,13 +8,13 @@ import {
     FormControlLabel,
     Checkbox,
   } from '@mui/material';
-  import LoadingButton from '@mui/lab/LoadingButton';
-  import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
-  import { Link } from 'react-router-dom';
-  import { boolean, literal, object, string, TypeOf } from 'zod';
-  import { zodResolver } from '@hookform/resolvers/zod';
-  import FormInput from './FormInput';
-  import styled from '@emotion/styled';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { boolean, literal, object, string, TypeOf } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import FormInput from './FormInput';
+import styled from '@emotion/styled';
 import { Denom, MintMessage, Nft } from '../../types/nft';
 import { border } from '@mui/system';
 import { useState } from 'react';
@@ -47,6 +47,8 @@ export type NftFormProps = {
 }
 
 export const NftForm = ({mintNft, account, denomId, setIsMintingNFTSucceed}: NftFormProps) => {
+  const [currentAccountIsRecipient, setCurrentAccountIsRecipient] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
     // ? Default Values
   const defaultValues: INFT = {
@@ -75,7 +77,7 @@ export const NftForm = ({mintNft, account, denomId, setIsMintingNFTSucceed}: Nft
           recipient: values.mintForAnotherAddress ? values.recipient : account.address,
           chainId: import.meta.env.VITE_APP_CHAIN_ID
         }      
-      await mintNft(mintMsg);
+      await mintNft(mintMsg);      
       setIsMintingNFTSucceed(true);
     }  
     else {       
@@ -83,7 +85,7 @@ export const NftForm = ({mintNft, account, denomId, setIsMintingNFTSucceed}: Nft
   }
   };
 
-  const [currentAccountIsRecipient, setCurrentAccountIsRecipient] =useState(true);
+ 
 
   return (
     <Container
@@ -102,12 +104,14 @@ export const NftForm = ({mintNft, account, denomId, setIsMintingNFTSucceed}: Nft
 
                     }}
                     onSubmit={(e) => {
+                      setIsLoading(true)
                         methods.handleSubmit(onSubmitHandler)(e)
+                        .then(()=> {methods.reset(defaultValues)})
                         .catch((error) => {
                           enqueueSnackbar(error.message, {
                             variant: 'error'
                           })
-                        })
+                        }).finally(()=>setIsLoading(false))
                     }}
                   >
                     <Typography
@@ -192,7 +196,7 @@ export const NftForm = ({mintNft, account, denomId, setIsMintingNFTSucceed}: Nft
                     }
 
                     <LoadingButton
-                      loading={false}
+                      loading={isLoading}
                       type='submit'
                       variant='contained'
                       sx={{
@@ -202,7 +206,7 @@ export const NftForm = ({mintNft, account, denomId, setIsMintingNFTSucceed}: Nft
                         marginInline: 'auto',
                       }}
                     >
-                      Minting Asset
+                      Mint Asset
                     </LoadingButton>
                   </Box>            
             {/* </Grid> */}
