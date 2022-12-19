@@ -4,10 +4,10 @@ import { OpenInFullRounded, MoreVert  } from '@mui/icons-material';
 import {Nft as Token} from '../../types/nft'
 import { ApprovedAddress } from './ApprovedAddress';
 
-// export const NFT = (nft: Token) => {
-export const Nft = () => {
-    const nft = token.nft;
-    
+type NFTProps = {
+    nft: Token
+}
+export const NFT = ({nft}: NFTProps) => {   
   return (
     <Box>
         <Card sx={{ 
@@ -70,13 +70,3 @@ export const Nft = () => {
   )
 }
 
-const token = {
-    "nft": {
-        "id": "1",
-        "name": "testtoken",
-        "uri": "",
-        "data": "testData",
-        "owner": "cudos1knf0flyucc2ut40cg8tn48sp70p2e65wse7qec",
-        "approvedAddresses": '["cudos1knf0flyucc2ut40cg8tn48sp70p2e65wse7qec", "cudos1jxyc7lny4q7te6sj5xyt9j86kyz82vlfdprl4a", "cudos1nj49l56x7sss5hqyvfmctxr3mq64whg273g3x5"]'
-    }
-}

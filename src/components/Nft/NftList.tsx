@@ -2,7 +2,7 @@ import { Box, Paper, Grid, Typography, Divider, CardContent, Card, Button, CardM
 import React, { useEffect, useState } from 'react'
 import { AccountDetails } from '../../ledgers/KeplrLedger'
 import { AllTokenResponse, Nft as NftType } from '../../types/nft'
-import { Nft } from './Nft'
+import { NFT as Nft } from './Nft'
 import reified from '../../assets/reified.png'
 import {useNavigate, useLocation} from 'react-router-dom';
 import { NfcRounded } from '@mui/icons-material'
@@ -29,7 +29,7 @@ export const NftList = ({getNft, account}: NftListProps) => {
                 ?? []                    
                 ) ;                         
         })();    
-    }, []); 
+    }, [account]); 
     
 
     if(filteredNFT.length<1){
@@ -95,7 +95,7 @@ export const NftList = ({getNft, account}: NftListProps) => {
                 columns={{ xs: 4, sm: 8, md: 12, lg:25 }}>
                 {filteredNFT.map((nft, index) => (
                 <Grid item xs={4} sm={4} md={4} lg={5} key={index}>
-                    <Nft></Nft>
+                    <Nft nft={nft}></Nft>
                 </Grid>
                 ))}
             </Grid> 
