@@ -99,16 +99,24 @@ export const DenomForm = ({createDenom, account, setDenom, setIsCreatingCollecti
         chainId: import.meta.env.VITE_APP_CHAIN_ID,
         sender: account.address
       } 
-      let successReturnsDenom = await createDenom(denom);
-      setDenom(successReturnsDenom);
-      setIsCreatingCollectionSucceed(true);
-      setNextStep();
+      try {
+        let successReturnsDenom = await createDenom(denom);
+        setDenom(successReturnsDenom);
+        setIsCreatingCollectionSucceed(true);
+        enqueueSnackbar('Collection Created', { variant: 'success'
+        });
+        setNextStep();
+      } catch (error: any) {
+        enqueueSnackbar(error.message, {
+          variant: 'error'
+        });
+      }
     }  
     else { 
       setIsCreatingCollectionSucceed(false);
       throw new Error("Please Connect your Keplr Wallet");
   }
-    
+ 
   };
 
   return (
