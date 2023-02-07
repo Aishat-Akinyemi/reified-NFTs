@@ -114,7 +114,7 @@ export const DenomForm = ({createDenom, account, setDenom, setIsCreatingCollecti
   return (
     <Container
       maxWidth={false}
-      sx={{ height: '100%', backgroundColor: { xs: '#fff', md: '#f4f4f4' } }}    >
+      sx={{ height: '100%', width:'fit-content', backgroundColor: { xs: '#fff', md: '#f4f4f4' } }}    >
           <FormProvider {...methods}>
             {/* <Grid
               container
