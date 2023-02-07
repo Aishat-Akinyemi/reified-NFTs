@@ -8,6 +8,7 @@ Built with React, Typescript, Cudosjs.
 Here is a sample .env content.
 
 VITE_NETWORK='LOCAL' || 'TESTNET'
+
 VITE_GAS_PRICE ="5000000000000acudos"
 
 \#TESTNET
