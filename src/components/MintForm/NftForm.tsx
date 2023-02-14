@@ -10,18 +10,16 @@ import {
   } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 import { boolean, literal, object, string, TypeOf } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormInput from './FormInput';
-import styled from '@emotion/styled';
 import { Denom, MintMessage, Nft } from '../../types/nft';
 import { border } from '@mui/system';
 import { useState } from 'react';
 import { AccountDetails } from '../../ledgers/KeplrLedger';
 import { useSnackbar } from 'notistack';
   
-// ? nft form Schema with Zod
+// nft form Schema with Zod
 const nftFormSchema = object({
     name: string()
         .min(4, 'Name is required')
@@ -32,42 +30,41 @@ const nftFormSchema = object({
     uri: string().url('This must be a valid url'),
     data: string().optional(),        
     mintForAnotherAddress: boolean().optional(),
-    recipient: string().min(2) // is valid address .refine()
+    recipient: string() 
   });
   
-// ? Infer the Schema to get the TS Type
+// Infer the Schema to get the TS Type
 type INFT = TypeOf<typeof nftFormSchema>;
 
 export type NftFormProps = {
-  account:AccountDetails|null
-  mintNft: (mintMessage: MintMessage) => Promise<string| undefined>
-  denomId: string|undefined
+  account: AccountDetails|null
+  mintNft: (mintMessage: MintMessage) => Promise<string | undefined>
+  denomId: string | undefined
   setIsMintingNFTSucceed: any
-
 }
 
 export const NftForm = ({mintNft, account, denomId, setIsMintingNFTSucceed}: NftFormProps) => {
   const [currentAccountIsRecipient, setCurrentAccountIsRecipient] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
-    // ? Default Values
+    // Default Values
   const defaultValues: INFT = {
     name: '',  
-    recipient: 'addressProps' ,
+    recipient: account?.address ?? '',
     data: '',
     uri: '',
     mintForAnotherAddress: false
   };
 
-  // ? The object returned from useForm Hook
+  // The object returned from useForm Hook
   const methods = useForm<INFT>({
     resolver: zodResolver(nftFormSchema),
     defaultValues,
   });
 
-  // ? Submit Handler
+  // Submit Handler
   const onSubmitHandler: SubmitHandler<INFT> = async (values: INFT) => {
-    if(account?.address && denomId){
+      if(account?.address && denomId){
         const mintMsg: MintMessage  = {
           denomId: denomId,
           name: values.name,
@@ -76,16 +73,34 @@ export const NftForm = ({mintNft, account, denomId, setIsMintingNFTSucceed}: Nft
           from: account.address,
           recipient: values.mintForAnotherAddress ? values.recipient : account.address,
           chainId: import.meta.env.VITE_APP_CHAIN_ID
-        }      
-      await mintNft(mintMsg);      
-      setIsMintingNFTSucceed(true);
+        } 
+        try {
+        await mintNft(mintMsg);  
+        enqueueSnackbar('NFT Minted', {
+          variant: 'success' })  
+        setIsMintingNFTSucceed(true);
+        methods.reset(defaultValues);
+        handleNFTOwnerToggle()
+      } catch (error:any) {
+        enqueueSnackbar(error.message, {
+        variant: 'error'
+      });
+      }
     }  
-    else {       
+    else {   
       throw new Error("Please Connect your Keplr Wallet");
   }
   };
 
  
+  const handleNFTOwnerToggle = () => {
+    setCurrentAccountIsRecipient(!currentAccountIsRecipient); 
+    if(currentAccountIsRecipient) {
+        methods.setValue('recipient', '')
+    } else {
+        methods.setValue('recipient', 'currentUser')
+    }               
+  }
 
   return (
     <Container
@@ -106,7 +121,6 @@ export const NftForm = ({mintNft, account, denomId, setIsMintingNFTSucceed}: Nft
                     onSubmit={(e) => {
                       setIsLoading(true)
                         methods.handleSubmit(onSubmitHandler)(e)
-                        .then(()=> {methods.reset(defaultValues)})
                         .catch((error) => {
                           enqueueSnackbar(error.message, {
                             variant: 'error'
@@ -146,24 +160,17 @@ export const NftForm = ({mintNft, account, denomId, setIsMintingNFTSucceed}: Nft
                       multiline
                       rows={5}
                     />
-
-                    
-                    <FormControlLabel
+                <FormControlLabel
                       control={
                         <Checkbox
                           size='small'
                           aria-label='mint for someone else checkbox'                          
                           sx={{outline: '1px solid #576b92'}}
                           color='secondary'
+                          checked={!currentAccountIsRecipient}
+                          inputProps={{ 'aria-label': 'controlled' }}
                           {...methods.register('mintForAnotherAddress', {
-                            onChange: (e) => {
-                                if(currentAccountIsRecipient) {
-                                    methods.setValue('recipient', '')
-                                } else{
-                                    methods.setValue('recipient', 'cu')
-                                }
-                                setCurrentAccountIsRecipient(!currentAccountIsRecipient);                                
-                            }
+                            onChange: (e) => {handleNFTOwnerToggle()}
                           })                        
                          }
                         />

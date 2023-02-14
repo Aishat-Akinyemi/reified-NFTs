@@ -12,7 +12,7 @@ import { Home } from './Pages/Home/Home';
 import Nav from './components/Nav/Nav';
 import { NftClient, NftQueryClient } from './ledgers/NftClient';
 import { keplrSigningClient, getConnectedAccount, AccountDetails } from './ledgers/KeplrLedger';
-import { CollectioList } from './components/Collection/CollectionList';
+import { CollectionList } from './components/Collection/CollectionList';
 import { NftList } from './components/Nft/NftList';
 import {Mint} from './components/MintForm/Mint';
 import { IssueMessage, MintMessage } from './types/nft';
@@ -64,15 +64,16 @@ function App() {
   try {
     if(isConnected){
        await nftSingingClient?.mintNFT(mintMessage);
-       enqueueSnackbar('NFT Minted', {
-        variant: 'success' })
+      //  enqueueSnackbar('NFT Minted', {
+      //   variant: 'success' })
         return mintMessage.denomId;       
     }
     else throw new Error("Keplr Wallet not connected");         
  } catch (error: any) {
-   enqueueSnackbar(error.message, {
-     variant: 'error'
-   })
+  //  enqueueSnackbar(error.message, {
+  //    variant: 'error'
+  //  });
+   throw error;
  }
 
  }
@@ -86,7 +87,7 @@ function App() {
               <Box sx={{paddingTop: '5em'}}>
                 <Routes>
                   <Route path='/' element={<Home/>}/>                  
-                  <Route path='/collections' element={<CollectioList getDenom={nftQueryClient.getAllDenoms()} account={account} />}/>
+                  <Route path='/collections' element={<CollectionList getDenom={nftQueryClient.getAllDenoms()} account={account} />}/>
                   <Route path='/assets/:denomId' element={<NftList getNft={getAllNftsById} account={account}/>}/>
                   <Route path='/mint' element={<Mint createDenom={createDenom} mintNft={mintNft} account={account}/>}/>                 
               </Routes>
