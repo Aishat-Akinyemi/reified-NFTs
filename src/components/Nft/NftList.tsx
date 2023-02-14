@@ -1,11 +1,11 @@
-import { Box, Paper, Grid, Typography, Divider, CardContent, Card, Button, CardMedia } from '@mui/material'
+import { Box, Paper, Grid, Typography, Divider, CardContent, Card, Button, CardMedia, Fab, Tooltip } from '@mui/material'
+import  Add from "@mui/icons-material/Add";
 import React, { useEffect, useState } from 'react'
 import { AccountDetails } from '../../ledgers/KeplrLedger'
 import { AllTokenResponse, Nft as NftType } from '../../types/nft'
 import { NFT as Nft } from './Nft'
 import reified from '../../assets/reified.png'
 import {useNavigate, useLocation} from 'react-router-dom';
-import { NfcRounded } from '@mui/icons-material'
 import { QueryCollectionResponse } from 'cudosjs/build/stargate/modules/nft/proto-types/query'
 
 type NftListProps  = {
@@ -23,7 +23,6 @@ export const NftList = ({getNft, account}: NftListProps) => {
         (async () => {
             const resp = await (await getNft(denomId));
             setCollection(resp);
-            console.log(resp);
             setFilteredNFTs(                
                 resp?.collection?.nfts?.filter((nft) => nft.owner == account?.address)
                 ?? []                    
@@ -44,9 +43,16 @@ export const NftList = ({getNft, account}: NftListProps) => {
                         Mint NFTs to represent your physical assets on the Cudos Blockchain. 
                         Connect your Wallet to start minting NFTs on Reified.
                     </Typography>
-                    <Button variant='contained' color='primary' sx={{margin: 5}}>
-                                    Mint NFTs for Physical Assets
-                                </Button>
+                    <Button 
+                        variant='contained' 
+                        color='primary' 
+                        sx={{margin: 5}}
+                        onClick={() => {
+                            navigate(`/mint`, {state: denomId})
+                        }}
+                    >
+                     Mint NFTs for Physical Assets
+                    </Button>
                 </CardContent>
                 </Box>
             <CardMedia
@@ -68,10 +74,22 @@ export const NftList = ({getNft, account}: NftListProps) => {
                         {collection?.collection?.denom?.name} Collection
                     </Typography>
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item xs={3}>
                     <Typography gutterBottom variant="h5" component="div">
                       Symbol:  {collection?.collection?.denom?.symbol}
                     </Typography>
+                </Grid>
+                <Grid item xs={1}>
+                <Tooltip title="Mint NFT To Add to Collection">
+                        <Fab color="primary" 
+                            aria-label="add"
+                            onClick={() => {
+                                navigate(`/mint`, {state: denomId})
+                            }}
+                        >
+                            <Add />
+                        </Fab>
+                </Tooltip>
                 </Grid>
             </Grid>
             <Grid container wrap='nowrap' spacing={3}  >

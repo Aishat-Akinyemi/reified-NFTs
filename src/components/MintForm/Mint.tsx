@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
   StepLabel,
   Button,
@@ -7,11 +7,11 @@ import {
   Step, StepContent
 } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import { DenomForm, DenomFormProps } from "./DenomForm";
-import { NftForm, NftFormProps } from "./NftForm";
+import { DenomForm } from "./DenomForm";
+import { NftForm } from "./NftForm";
 import { IssueMessage, MintMessage } from "../../types/nft";
 import { AccountDetails } from "../../ledgers/KeplrLedger";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const steps = ["Create Collection", "Mint NFT for an Asset"];
 type MintProps = {
@@ -25,6 +25,7 @@ export const Mint = ({account, createDenom, mintNft}: MintProps) => {
   const [isCreatingCollectionSucceed, setIsCreatingCollectionSucceed] = useState(false);  
   const [isMintingNFTFSucceed, setIsMintingNFTSucceed] = useState(false);  
   let navigate = useNavigate();  
+  const location = useLocation();
 
   const handleReset = () => {
     setActiveStep(0);
@@ -33,6 +34,14 @@ export const Mint = ({account, createDenom, mintNft}: MintProps) => {
     setIsMintingNFTSucceed(false);
   };
 
+  useEffect(() => {
+    setDenomId(location.state);
+    
+    if(location.state){
+      handleNext()
+    }
+  }, [location])
+  
   const handleBack = () => {
     setIsMintingNFTSucceed(false);
   };
