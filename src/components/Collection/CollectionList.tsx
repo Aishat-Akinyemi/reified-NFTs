@@ -7,11 +7,11 @@ import reified from '../../assets/reified.png'
 import { Denom } from '../../types/nft'
 
 
-type CollectioListProps  = {
+type CollectionListProps  = {
     getDenom:  Promise<QueryDenomsResponse>
     account: AccountDetails|null,
 }
-export const CollectioList = ({getDenom, account}: CollectioListProps) => {
+export const CollectionList = ({getDenom, account}: CollectionListProps) => {
     const [filteredDenoms, setFilteredDenom] = useState<Denom[]>([])
     useEffect(() => {
         (async () => {

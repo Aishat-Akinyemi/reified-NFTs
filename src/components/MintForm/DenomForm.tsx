@@ -20,7 +20,7 @@ import { useState } from 'react';
 
 const nftQueryClient = new NftQueryClient();
   
-// ? Login Schema with Zod
+// Denom form schema with Zod
 const denomFormSchema  = object({
     denomId: string()
         .min(4, 'DenomId should be at least 4 alphanumeric character')
@@ -59,7 +59,7 @@ const denomFormSchema  = object({
     description: string().optional(),
   });
   
-// ? Infer the Schema to get the TS Type
+// Infer the Schema to get the TS Type
 type IDenom = TypeOf<typeof denomFormSchema>;
 
 
@@ -73,7 +73,7 @@ export type DenomFormProps = {
 export const DenomForm = ({createDenom, account, setDenom, setIsCreatingCollectionSucceed, setNextStep}: DenomFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
-    // ? Default Values
+    // Default Values
   const defaultValues: IDenom = {
     denomId: '',
     name: '',
@@ -81,13 +81,13 @@ export const DenomForm = ({createDenom, account, setDenom, setIsCreatingCollecti
     description: ''  
   };
 
-  // ? The object returned from useForm Hook
+  // The object returned from useForm Hook
   const methods = useForm<IDenom>({
     resolver: zodResolver(denomFormSchema),
     defaultValues,
   });
 
-  // ? Submit Handler
+  // Submit Handler
   const onSubmitHandler: SubmitHandler<IDenom> = async (values: IDenom) => {
     if(account?.address){
       const denom: IssueMessage = {
@@ -124,14 +124,6 @@ export const DenomForm = ({createDenom, account, setDenom, setIsCreatingCollecti
       maxWidth={false}
       sx={{ height: '100%', width:'fit-content', backgroundColor: { xs: '#fff', md: '#f4f4f4' } }}    >
           <FormProvider {...methods}>
-            {/* <Grid
-              container
-              sx={{
-                boxShadow: { sm: '0 0 5px #ddd' },
-                py: '6rem',
-                px: '1rem',
-              }}
-            > */}
               <Box
                     display='flex'
                     flexDirection='column'
