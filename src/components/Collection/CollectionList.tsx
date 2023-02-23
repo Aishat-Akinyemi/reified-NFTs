@@ -5,13 +5,14 @@ import { AccountDetails } from '../../ledgers/KeplrLedger'
 import { Collection } from './Collection'
 import reified from '../../assets/reified.png'
 import { Denom } from '../../types/nft'
-
+import {useNavigate} from 'react-router-dom';
 
 type CollectionListProps  = {
     getDenom:  Promise<QueryDenomsResponse>
     account: AccountDetails|null,
 }
 export const CollectionList = ({getDenom, account}: CollectionListProps) => {
+    let navigate = useNavigate();
     const [filteredDenoms, setFilteredDenom] = useState<Denom[]>([])
     useEffect(() => {
         (async () => {
@@ -22,6 +23,7 @@ export const CollectionList = ({getDenom, account}: CollectionListProps) => {
                 ) ;    
         })();    
     }, []);    
+    
 
     if(filteredDenoms.length<1){
         return (
@@ -35,9 +37,15 @@ export const CollectionList = ({getDenom, account}: CollectionListProps) => {
                         Mint NFTs to represent your physical assets on the Cudos Blockchain. 
                         Connect your Wallet to start minting NFTs on Reified.
                     </Typography>
-                    <Button variant='contained' color='primary' sx={{margin: 5}}>
+                    <Button variant='contained' 
+                    color='primary' 
+                    sx={{margin: 5}}
+                    onClick={() => {
+                        navigate(`/mint`)
+                    }}
+                    >
                                     Create Collection
-                                </Button>
+                    </Button>
                 </CardContent>
                 </Box>
             <CardMedia
