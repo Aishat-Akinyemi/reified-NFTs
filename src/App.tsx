@@ -7,7 +7,7 @@ import {Box, CssBaseline, Typography, Button} from '@mui/material';
 import { useSnackbar } from 'notistack';
 import '@fontsource/poppins'
 import theme from './theme'
-import { Routes, Route, useNavigate} from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 import { Home } from './Pages/Home/Home';
 import Nav from './components/Nav/Nav';
 import { NftClient, NftQueryClient } from './ledgers/NftClient';
@@ -70,9 +70,6 @@ function App() {
     }
     else throw new Error("Keplr Wallet not connected");         
  } catch (error: any) {
-  //  enqueueSnackbar(error.message, {
-  //    variant: 'error'
-  //  });
    throw error;
  }
 
