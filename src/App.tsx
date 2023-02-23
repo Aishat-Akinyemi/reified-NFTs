@@ -84,7 +84,7 @@ function App() {
               <Box sx={{paddingTop: '5em'}}>
                 <Routes>
                   <Route path='/' element={<Home/>}/>                  
-                  <Route path='/collections' element={<CollectionList getDenom={nftQueryClient.getAllDenoms()} account={account} />}/>
+                  <Route path='/collections' element={<CollectionList getDenom={nftQueryClient.getAllDenoms} account={account} />}/>
                   <Route path='/assets/:denomId' element={<NftList getNft={getAllNftsById} account={account}/>}/>
                   <Route path='/mint' element={<Mint createDenom={createDenom} mintNft={mintNft} account={account}/>}/>                 
               </Routes>

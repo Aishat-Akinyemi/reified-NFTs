@@ -8,7 +8,7 @@ import { Denom } from '../../types/nft'
 import {useNavigate} from 'react-router-dom';
 
 type CollectionListProps  = {
-    getDenom:  Promise<QueryDenomsResponse>
+    getDenom:  () => Promise<QueryDenomsResponse>,
     account: AccountDetails|null,
 }
 export const CollectionList = ({getDenom, account}: CollectionListProps) => {
@@ -16,13 +16,13 @@ export const CollectionList = ({getDenom, account}: CollectionListProps) => {
     const [filteredDenoms, setFilteredDenom] = useState<Denom[]>([])
     useEffect(() => {
         (async () => {
-            const resp = await getDenom; 
+            const resp = await getDenom(); 
             setFilteredDenom(
                 resp?.denoms.filter(denom => denom.creator == account?.address)
                 ?? []                    
-                ) ;    
-        })();    
-    }, []);    
+                );  
+        })(); 
+    }, [getDenom]);    
     
 
     if(filteredDenoms.length<1){
