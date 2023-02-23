@@ -2,13 +2,13 @@ import { Box, Paper, Grid, Typography, Divider, CardContent, Card, Button, CardM
 import  Add from "@mui/icons-material/Add";
 import React, { useEffect, useState } from 'react'
 import { AccountDetails } from '../../ledgers/KeplrLedger'
-import { AllTokenResponse, Nft as NftType } from '../../types/nft'
+import { Nft as NftType } from '../../types/nft'
 import { NFT as Nft } from './Nft'
 import reified from '../../assets/reified.png'
 import {useNavigate, useLocation} from 'react-router-dom';
 import { QueryCollectionResponse } from 'cudosjs/build/stargate/modules/nft/proto-types/query'
 
-type NftListProps  = {
+type NftListProps  = {     
     getNft: (denomId: string) => Promise<QueryCollectionResponse>
     account: AccountDetails | null
 }
