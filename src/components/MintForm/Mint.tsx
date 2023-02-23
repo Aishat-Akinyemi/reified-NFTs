@@ -1,11 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {
-  StepLabel,
-  Button,
-  Box,
-  Stepper,
-  Step, StepContent
-} from "@mui/material";
+import { StepLabel, Button, Box, Stepper, Step, StepContent} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import { DenomForm } from "./DenomForm";
 import { NftForm } from "./NftForm";
@@ -36,7 +30,6 @@ export const Mint = ({account, createDenom, mintNft}: MintProps) => {
 
   useEffect(() => {
     setDenomId(location.state);
-    
     if(location.state){
       handleNext()
     }
