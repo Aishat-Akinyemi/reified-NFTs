@@ -29,13 +29,18 @@ function Nav({connect, account, disconnect, isConnected}: NavProps) {
       navigate('/collections');
     }
   }
+  
   const goToMintPage = ()=> {
     handleCloseNavMenu();
     if(account !==null) {            
       navigate('/mint');
     }
   }
-  
+
+  const goToHomePage = ()=> {
+    handleCloseNavMenu();         
+      navigate('/');
+  }
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -202,6 +207,7 @@ function Nav({connect, account, disconnect, isConnected}: NavProps) {
                   <MenuItem onClick={(e)=> {
                       handleCloseUserMenu();
                       disconnect();
+                      goToHomePage();
                     }}>
                     <Typography textAlign="center">Disconnect</Typography>
                     </MenuItem>
