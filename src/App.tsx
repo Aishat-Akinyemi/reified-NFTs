@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
+import React, { useState } from 'react'
 import './App.css'
 
 import { ThemeProvider } from '@mui/material/styles';
-import {Box, CssBaseline, Typography, Button} from '@mui/material';
+import {Box, CssBaseline} from '@mui/material';
 import { useSnackbar } from 'notistack';
 import '@fontsource/poppins'
 import theme from './theme'
@@ -32,6 +31,7 @@ function App() {
       setIsConnected(false);
     }
   }
+
   const connectWallet = async() => {
       try{
         const cudosSigningStargateClient =  await keplrSigningClient();        
@@ -44,35 +44,25 @@ function App() {
           });
       } 
   }
+
   const getAllNftsById = async (denomId: string) =>{
     return await nftQueryClient.getAllTokensInCollection(denomId)
   } 
   
  const createDenom = async (denomMessage: IssueMessage) => {
-      try {
          if(isConnected){
             await nftSingingClient?.issueDenom(denomMessage);
             return denomMessage.id;
          }
-         else throw new Error("Keplr Wallet not connected");         
-      } catch (error: any) {
-        throw error;
-      }
+         else throw new Error("Keplr Wallet not connected"); 
  }
 
  const mintNft = async (mintMessage: MintMessage) => {
-  try {
     if(isConnected){
        await nftSingingClient?.mintNFT(mintMessage);
-      //  enqueueSnackbar('NFT Minted', {
-      //   variant: 'success' })
-        return mintMessage.denomId;       
+      return mintMessage.denomId;       
     }
-    else throw new Error("Keplr Wallet not connected");         
- } catch (error: any) {
-   throw error;
- }
-
+    else throw new Error("Keplr Wallet not connected"); 
  }
 
   return (  

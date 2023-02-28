@@ -1,4 +1,4 @@
-import { Box, Paper, Grid, Typography, Divider, CardContent, Card, Button, CardMedia, Fab, Tooltip } from '@mui/material'
+import { Box, Grid, Typography, Divider, CardContent, Card, Button, CardMedia, Fab, Tooltip } from '@mui/material'
 import  Add from "@mui/icons-material/Add";
 import React, { useEffect, useState } from 'react'
 import { AccountDetails } from '../../ledgers/KeplrLedger'
@@ -13,7 +13,7 @@ type NftListProps  = {
     account: AccountDetails | null
 }
 export const NftList = ({getNft, account}: NftListProps) => {   
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const location = useLocation();
     const denomId = location.state;
     const [collection, setCollection] = useState<QueryCollectionResponse>()
