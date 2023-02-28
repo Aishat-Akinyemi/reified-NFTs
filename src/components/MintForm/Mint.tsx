@@ -18,7 +18,7 @@ export const Mint = ({account, createDenom, mintNft}: MintProps) => {
   const [denomId, setDenomId] = useState<string | undefined>();
   const [isCreatingCollectionSucceed, setIsCreatingCollectionSucceed] = useState(false);  
   const [isMintingNFTFSucceed, setIsMintingNFTSucceed] = useState(false);  
-  let navigate = useNavigate();  
+  const navigate = useNavigate();  
   const location = useLocation();
 
   const handleReset = () => {

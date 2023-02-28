@@ -4,7 +4,6 @@ Reified is a PoC for a product where users can easily trigger the creation of NF
 
 Built with React, Typescript, Cudosjs.
 
-
 Here is a sample .env content.
 
 VITE_NETWORK='LOCAL' || 'TESTNET'

@@ -1,4 +1,5 @@
-import { Box, Paper, Grid, Typography, Divider, Button, Card, CardMedia, CardContent } from '@mui/material'
+import React from "react";
+import { Box, Grid, Typography, Divider, Button, Card, CardMedia, CardContent } from '@mui/material'
 import { QueryDenomsResponse } from 'cudosjs/build/stargate/modules/nft/proto-types/query'
 import { useEffect, useState } from 'react'
 import { AccountDetails } from '../../ledgers/KeplrLedger'
@@ -12,7 +13,7 @@ type CollectionListProps  = {
     account: AccountDetails|null,
 }
 export const CollectionList = ({getDenom, account}: CollectionListProps) => {
-    let navigate = useNavigate();
+    const navigate = useNavigate();
     const [filteredDenoms, setFilteredDenom] = useState<Denom[]>([])
     useEffect(() => {
         (async () => {

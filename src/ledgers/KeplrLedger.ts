@@ -1,4 +1,4 @@
-import { GasPrice, SigningCosmWasmClient, SigningStargateClient } from "cudosjs";
+import { GasPrice, SigningStargateClient } from "cudosjs";
 
 export type AccountDetails = 
   {address: string, username: string}
