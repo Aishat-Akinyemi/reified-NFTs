@@ -61,7 +61,12 @@ export class NftQueryClient implements INftQueryClient {
   }
 }
 
-export class NftClient {
+export interface INftClient {
+  issueDenom: (denomMessage: IssueMessage) => Promise<void>;
+  mintNFT: (mintMessage: MintMessage) => Promise<void>;
+}
+
+export class NftClient implements INftClient {
   constructor(private client: SigningStargateClient) {
     this.client = client;
   }
