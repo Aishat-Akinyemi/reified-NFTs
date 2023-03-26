@@ -64,22 +64,20 @@ export const Collection = ({ denom }: CollectionProps) => {
               </Avatar>
             </Tooltip>
           }
-          action={
-            <IconButton aria-label="more">
-              <MoreVert color="primary" />
-            </IconButton>
-          }
           title={
             <Tooltip title={denom.name}>
               <Typography color="text.secondary">
-                {`${denom.name.toLocaleUpperCase()}`}
+                {`${denom.name.substring(0, 5).toLocaleUpperCase()}`}
               </Typography>
             </Tooltip>
           }
           subheader={
             <Tooltip title={denom.creator}>
               <Typography sx={{ my: 1.5, fontSize: 12 }} color="text.secondary">
-                {`${denom.creator.substring(0, 15)}...`}
+                {`${denom.creator.substring(0, 7)}...${denom.creator.substring(
+                  denom.creator.length - 5,
+                  denom.creator.length - 1
+                )}`}
               </Typography>
             </Tooltip>
           }

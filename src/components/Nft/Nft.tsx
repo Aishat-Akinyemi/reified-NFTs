@@ -59,11 +59,6 @@ export const NFT = ({ nft }: NFTProps) => {
               </Avatar>
             </Tooltip>
           }
-          action={
-            <IconButton aria-label="more">
-              <MoreVert color="primary" />
-            </IconButton>
-          }
           title={
             <Tooltip title={nft.name}>
               <Typography color="text.secondary">
@@ -74,7 +69,10 @@ export const NFT = ({ nft }: NFTProps) => {
           subheader={
             <Tooltip title={nft.owner}>
               <Typography sx={{ my: 1.5, fontSize: 12 }} color="text.secondary">
-                {`${nft.owner.substring(0, 15)}...`}
+                {`${nft.owner.substring(0, 7)}...${nft.owner.substring(
+                  nft.owner.length - 5,
+                  nft.owner.length - 1
+                )}`}
               </Typography>
             </Tooltip>
           }
