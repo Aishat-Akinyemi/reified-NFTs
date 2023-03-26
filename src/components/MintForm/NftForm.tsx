@@ -15,24 +15,19 @@ import { MintMessage } from "../../types/nft";
 import { AccountDetails } from "../../ledgers/KeplrLedger";
 import { useSnackbar } from "notistack";
 
-// nft form Schema with Zod
+// The component uses Zod package to validate form input fields.
+// The NFT form validation schema is defined with ZodObject
 const nftFormSchema = object({
   name: string()
     .min(4, "Name is required")
-    .max(20, "Name should not be more than 20 character")
-    .refine(
-      (val) => {
-        return true;
-      },
-      { message: "Name already in use" }
-    ),
+    .max(20, "Name should not be more than 20 character"),
   uri: string().url("This must be a valid url"),
   data: string().optional(),
   mintForAnotherAddress: boolean().optional(),
   recipient: string(),
 });
 
-// Infer the Schema to get the TS Type
+// Infer the NFT form schema to get the TS Type using Zod's TypeOf
 type INFT = TypeOf<typeof nftFormSchema>;
 
 export type NftFormProps = {
@@ -41,6 +36,17 @@ export type NftFormProps = {
   denomId: string | undefined;
   setIsMintingNFTSucceed: any;
 };
+
+/**
+ * This component is used for the second step in Minting NFT collections.
+ * It is used to mint the actual NFTs in the collection.
+ * It's parent component is the Mint component.
+ * @param {Object} props - Props for NftForm component.
+ * @param {Function} props.mintNft Function that takes object `mintMessae` and returns a promise containing the nft's name as string.
+ * @param {Object|null} props.account - Object containining the details of the connected account, or null if no account is connected.
+ * @param {string} props.denomId Passed in from the Mint component, this is the denomId of the Collection the NFT is a part of.
+ * @param {Function} props.setIsMintingNFTSucceed Passed in from the Mint component, this function is used to inform the parent component (Mint) whether the NFT was minted successfully (true) or not (false).
+ */
 
 export const NftForm = ({
   mintNft,
@@ -52,7 +58,8 @@ export const NftForm = ({
     useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
-  // Default Values
+
+  // Set the default values by instantiating an object of type INFT, passing into the object properties some default values
   const defaultValues: INFT = {
     name: "",
     recipient: account?.address ?? "",
@@ -61,13 +68,17 @@ export const NftForm = ({
     mintForAnotherAddress: false,
   };
 
-  // The object returned from useForm Hook
+  /**
+   * The object returned from useForm Hook.
+   * React hook form's useForm hook to manage the NftForm. We pass an object with properties "resolver, and defaultValues" as its parameters.
+   * The resolver enables us to use an external validation library for the denomForm validation, in this case we are using zodResolver.
+   * The zodResolver hook takes the nftFormSchema we defined earlier.
+   */
   const methods = useForm<INFT>({
     resolver: zodResolver(nftFormSchema),
     defaultValues,
   });
 
-  // Submit Handler
   const onSubmitHandler: SubmitHandler<INFT> = async (values: INFT) => {
     if (account?.address && denomId) {
       const mintMsg: MintMessage = {
@@ -112,6 +123,7 @@ export const NftForm = ({
     <Container
       sx={{ height: "100%", backgroundColor: "text.secondary", width: "40em" }}
     >
+      {/* react hook form's FormProvider */}
       <FormProvider {...methods}>
         <Box
           display="flex"
@@ -208,7 +220,6 @@ export const NftForm = ({
             Mint Asset
           </LoadingButton>
         </Box>
-        {/* </Grid> */}
       </FormProvider>
     </Container>
   );

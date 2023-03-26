@@ -10,13 +10,17 @@ import { NftQueryClient } from "../../ledgers/NftClient";
 import { AccountDetails } from "../../ledgers/KeplrLedger";
 import { useSnackbar } from "notistack";
 
+// NFTQuery client to validate that the denom id, and denom symbols are not in use.
 const nftQueryClient = new NftQueryClient();
 
-// Denom form schema with Zod
+// The component uses Zod package to validate form input fields.
+// The Denom form validation schema is defined with ZodObject
 const denomFormSchema = object({
   denomId: string()
     .min(4, "DenomId should be at least 4 alphanumeric character")
     .max(8, "DenomId should not be more than 8 characters")
+    /* Custom validation with Zod's refine method. Checks if the query with the denomId will return any denom. 
+    A null response is expected for denom Id that is currently available. */
     .refine(
       async (val) => {
         try {
@@ -31,6 +35,8 @@ const denomFormSchema = object({
   name: string()
     .min(4, "Name is required.")
     .max(20, "Name should not be more than 20 characters.")
+    /* Validates the denom name by checking if a query with the name will return any denom. 
+    A null response is expected for denom name that is currently available. */
     .refine(
       async (val) => {
         try {
@@ -45,6 +51,8 @@ const denomFormSchema = object({
   symbol: string()
     .min(3, "Symbol must be at least 3 characters.")
     .max(6, "Symbol cannot be more than 6 characters.")
+    /*  Checks if the query with the denom symbol will return any denom. 
+    A null response is expected for denom symbol that is currently available. */
     .refine(
       async (val) => {
         try {
@@ -62,26 +70,40 @@ const denomFormSchema = object({
   description: string().optional(),
 });
 
-// Infer the Schema to get the TS Type
+// Infer the Denom form schema to get the TS Type using Zod's TypeOf
 type IDenom = TypeOf<typeof denomFormSchema>;
 
 export type DenomFormProps = {
   createDenom: (denom: IssueMessage) => Promise<string | undefined>;
   account: AccountDetails | null;
-  setDenom: any;
-  setIsCreatingCollectionSucceed: any;
-  setNextStep: any;
+  setDenomId: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setIsCreatingCollectionSucceed: React.Dispatch<React.SetStateAction<boolean>>;
+  setNextStep: () => void;
 };
+
+/**
+ * This component is used for the first step in Minting NFT collections.
+ * It is used to create the Denomination of the Collection using a form.
+ * It's parent component is the Mint component.
+ * @param {Object} props - Props for DenomForm component.
+ * @param {Function} props.createDenom Function that takes object `IssueMessage` and returns a promise containing the denomId string.
+ * @param {Object|null} props.account - Object containining the details of the connected account, or null if no account is connected.
+ * @param {Function} props.setDenomId Passed in from the Mint component, this function sets the DenomId property in the Mint component after a Denom has been successfully created.
+ * @param {Function} props.setIsCreatingCollectionSucceed Passed in from the Mint component, this function is used to inform the parent component (Mint) whether the denom was created successfully (true) or not (false).
+ * @param {Function} props.setNextStep Passed in from the Mint component, this function sets the next step in the NFT minting process
+ */
+
 export const DenomForm = ({
   createDenom,
   account,
-  setDenom,
+  setDenomId: setDenomId,
   setIsCreatingCollectionSucceed,
   setNextStep,
 }: DenomFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
-  // Default Values
+
+  // Set the default values by instantiating an object of type IDenom, passing into the object properties some default values
   const defaultValues: IDenom = {
     denomId: "",
     name: "",
@@ -89,13 +111,17 @@ export const DenomForm = ({
     description: "",
   };
 
-  // The object returned from useForm Hook
-  const methods = useForm<IDenom>({
+  /**
+   * The object returned from useForm Hook. 
+   * React hook form's useForm hook to manage the denomForm. We pass an object with properties "resolver, and defaultValues" as its parameters.
+   * The resolver enables us to use an external validation library for the denomForm validation, in this case we are using zodResolver.
+   * The zodResolver hook takes the denomFormSchema we defined earlier.
+   */
+  const denomFormMethods = useForm<IDenom>({
     resolver: zodResolver(denomFormSchema),
     defaultValues,
   });
 
-  // Submit Handler
   const onSubmitHandler: SubmitHandler<IDenom> = async (values: IDenom) => {
     if (account?.address) {
       const denom: IssueMessage = {
@@ -109,10 +135,10 @@ export const DenomForm = ({
       };
       try {
         const successReturnsDenom = await createDenom(denom);
-        setDenom(successReturnsDenom);
+        setDenomId(successReturnsDenom);
         setIsCreatingCollectionSucceed(true);
         enqueueSnackbar("Collection Created", { variant: "success" });
-        setNextStep();
+        setNextStep(); //sets the next step in the minting process to display the NFT form the collection denom has been successfully created.
       } catch (error: any) {
         enqueueSnackbar(error.message, {
           variant: "error",
@@ -133,7 +159,8 @@ export const DenomForm = ({
         backgroundColor: { xs: "#fff", md: "#f4f4f4" },
       }}
     >
-      <FormProvider {...methods}>
+      {/* react hook form's FormProvider */}
+      <FormProvider {...denomFormMethods}>
         <Box
           display="flex"
           flexDirection="column"
@@ -143,7 +170,7 @@ export const DenomForm = ({
           sx={{ py: "6rem", px: "1rem", width: "50vw" }}
           onSubmit={(e) => {
             setIsLoading(true);
-            methods
+            denomFormMethods
               .handleSubmit(onSubmitHandler)(e)
               .catch((error: any) => {
                 enqueueSnackbar(error.message, {

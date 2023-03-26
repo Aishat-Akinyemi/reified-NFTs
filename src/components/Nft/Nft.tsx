@@ -16,6 +16,11 @@ import { Nft as Token } from "../../types/nft";
 type NFTProps = {
   nft: Token;
 };
+
+/**
+ * This component renders a card that displays information about each NFT.
+ * @param {Object} props.nft - An object containing information about the NFT.
+ */
 export const NFT = ({ nft }: NFTProps) => {
   return (
     <Box>

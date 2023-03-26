@@ -18,6 +18,11 @@ type CollectionProps = {
   denom: Denom;
 };
 
+/**
+ * This component renders a card that displays information about each NFT collection i.e. denom
+ * @param {Object} props.denom - An object containing information about the collection.
+ */
+
 export const Collection = ({ denom }: CollectionProps) => {
   const navigate = useNavigate();
 
@@ -33,7 +38,6 @@ export const Collection = ({ denom }: CollectionProps) => {
           p: 2,
           borderColor: "secondary.light",
           "&:hover": {
-            // backgroundColor: 'primary.main',
             opacity: [0.9, 0.8, 0.7],
           },
         }}
@@ -54,7 +58,7 @@ export const Collection = ({ denom }: CollectionProps) => {
               >
                 <Typography sx={{ fontSize: 10, fontWeight: "bold" }}>
                   {denom.symbol
-                    ? denom.symbol.substring(0, 5).toLocaleUpperCase()
+                    ? denom.symbol.substring(0, 5).toLocaleUpperCase() //truncate the denom symbol to display the first 5 characters
                     : ""}
                 </Typography>
               </Avatar>
@@ -90,7 +94,7 @@ export const Collection = ({ denom }: CollectionProps) => {
             <IconButton
               aria-label="View Collection"
               onClick={() => {
-                navigate(`/assets/${denom.id}`, { state: denom.id });
+                navigate(`/assets/${denom.id}`, { state: denom.id }); // Navigates to the page displaying the list of NFTs in this collection, owned by the connected cudos account.
               }}
             >
               <OpenInFullRounded color="primary" />

@@ -1,3 +1,4 @@
+// Import various functions and classes from the CudosJS library
 import {
   Account,
   assertIsDeliverTxSuccess,
@@ -6,6 +7,7 @@ import {
   StargateClient,
   generateMsg,
 } from "cudosjs";
+// Import NFT-related query/response types from the CudosJS library
 import {
   QueryCollectionResponse,
   QueryDenomByNameResponse,
@@ -15,11 +17,16 @@ import {
   QueryNFTResponse,
   QuerySupplyResponse,
 } from "cudosjs/build/stargate/modules/nft/proto-types/query";
-import {} from "cudosjs/build/stargate/index";
 import { IssueMessage, MintMessage } from "../types/nft";
 import { getConnectedAccount } from "./KeplrLedger";
 
+/**
+ * Connects to the Cudos blockchain's RPC endpoint using the StargateClient class. It enables query operations on the Cudos blockchain.
+ */
 const queryClient = await StargateClient.connect(import.meta.env.VITE_APP_RPC);
+/**
+ * An interface that defines the functions needed to interact with the NFT module.
+ */
 export interface INftQueryClient {
   getAllDenoms: () => Promise<QueryDenomsResponse>;
   getDenom: (denomId: string) => Promise<QueryDenomResponse>;
@@ -33,6 +40,9 @@ export interface INftQueryClient {
   getNFTDenomSupply: (denomId: string) => Promise<QuerySupplyResponse>;
 }
 
+/**
+ * A class that implements the INftQueryClient interface, providing an easy-to-use interface for querying the NFT module on the Cudos blockchain.
+ */
 export class NftQueryClient implements INftQueryClient {
   getAllDenoms() {
     return queryClient.nftModule.getNftDenoms();
@@ -60,7 +70,11 @@ export class NftQueryClient implements INftQueryClient {
     return queryClient.nftModule.getNftDenomSupply(denomId);
   }
 }
-
+/**
+ * An interface that defines the functions for issuing and minting NFTs on the Cudos blockchain.
+ * It includes functions for issueDenom, which issues a new NFT denomination, and mintNFT, which mints a new NFT.
+ * An NFT must belong to a denomination/collection, hence a denom must be issued before an NFT can be created.
+ */
 export interface INftClient {
   issueDenom: (denomMessage: IssueMessage) => Promise<void>;
   mintNFT: (mintMessage: MintMessage) => Promise<void>;
@@ -82,23 +96,6 @@ export class NftClient implements INftClient {
     );
     assertIsDeliverTxSuccess(await result);
   }
-  // async issueDenom(denomMessage: IssueMessage){
-  //     const account = await getConnectedAccount();
-
-  //     const result = (await this.client.nftIssueDenom(account.address,
-  //         denomMessage.denomId,
-  //         denomMessage.name,
-  //         denomMessage.schema,
-  //         denomMessage.symbol,
-  //         'test',
-  //         account.address,
-  //         denomMessage.schema,
-  //         'test',
-  //         GasPrice.fromString("5000000000000acudos")
-  //     ));
-  //     console.log(result);
-  //     assertIsDeliverTxSuccess(await result);
-  // }
 
   async mintNFT(mintMessage: MintMessage) {
     const account = await getConnectedAccount();

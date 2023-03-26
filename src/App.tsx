@@ -21,23 +21,20 @@ import { Mint } from "./components/MintForm/Mint";
 import { IssueMessage, MintMessage } from "./types/nft";
 
 function App() {
+  //initialise the state variables
   const [nftSingingClient, setNftSigningClient] = useState<NftClient | null>(
     null
   );
+  const nftQueryClient: NftQueryClient | null = new NftQueryClient();
+
   const [isConnected, setIsConnected] = useState<boolean>(false);
   const [account, setAccount] = useState<AccountDetails | null>(null);
-  const nftQueryClient: NftQueryClient | null = new NftQueryClient();
   const { enqueueSnackbar } = useSnackbar();
-
-  const disconnect = () => {
-    if (nftSingingClient) {
-      nftSingingClient.disconnect();
-      setNftSigningClient(null);
-      setAccount(null);
-      setIsConnected(false);
-    }
-  };
-
+  /**
+   * Handles connecting to the Cudos blockchain network.
+   * Connection is maintained via the keplrSigningClient function, which returns a cudosSigningStargateClient that is used to initialize the NftClient.
+   * We also set the account, and set the connection state, setIsConnected, to true.
+   */
   const connectWallet = async () => {
     try {
       const cudosSigningStargateClient = await keplrSigningClient();
@@ -51,10 +48,25 @@ function App() {
     }
   };
 
+  /**
+   * This handles disconnecting from the Cudos blockchain network if there's a current connection.
+   * It also resets the following state variables: nftSigningClient, account and isConnected.
+   */
+  const disconnect = () => {
+    if (nftSingingClient) {
+      nftSingingClient.disconnect();
+      setNftSigningClient(null);
+      setAccount(null);
+      setIsConnected(false);
+    }
+  };
+
+  // Fetches NFTs belonging to a denom
   const getAllNftsById = async (denomId: string) => {
     return await nftQueryClient.getAllTokensInCollection(denomId);
   };
 
+ // This handles the creation of a new NFT denom
   const createDenom = async (denomMessage: IssueMessage) => {
     if (isConnected) {
       await nftSingingClient?.issueDenom(denomMessage);
@@ -62,12 +74,14 @@ function App() {
     } else throw new Error("Keplr Wallet not connected");
   };
 
+  //This handles minting of NFTs
   const mintNft = async (mintMessage: MintMessage) => {
     if (isConnected) {
       await nftSingingClient?.mintNFT(mintMessage);
       return mintMessage.denomId;
     } else throw new Error("Keplr Wallet not connected");
   };
+
 
   return (
     <Box sx={{ maxWidth: "100%" }}>

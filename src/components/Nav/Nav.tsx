@@ -161,6 +161,7 @@ function Nav({ connect, account, disconnect, isConnected }: NavProps) {
           >
             REIFIED
           </Typography>
+          
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {isConnected && (
               <>

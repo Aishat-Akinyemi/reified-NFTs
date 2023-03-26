@@ -23,6 +23,14 @@ type NftListProps = {
   getNft: (denomId: string) => Promise<QueryCollectionResponse>;
   account: AccountDetails | null;
 };
+
+/**
+ * NftList component displays a list of user's NFT. Uses the Nft component as its child component.
+ * @param {Object} props - Props for NftList component.
+ * @param {Function} props.getNft - Function that returns a promise containing query response for NFT collections.
+ * @param {Object|null} props.account - Object containining the details of the connected account, or null if no account is connected.
+ */
+
 export const NftList = ({ getNft, account }: NftListProps) => {
   const navigate = useNavigate();
   const location = useLocation();
