@@ -9,8 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@cosmostation/cosmos-client": "^0.0.4",
-    "@cosmostation/extension-client": "^0.1.15",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@fontsource/poppins": "^4.5.10",
@@ -19,7 +17,6 @@
     "@mui/icons-material": "^5.10.16",
     "@mui/lab": "^5.0.0-alpha.111",
     "@mui/material": "^5.10.17",
-    "axios": "^1.2.1",
     "cudosjs": "^1.2.4",
     "notistack": "^2.0.8",
     "react": "^18.2.0",
