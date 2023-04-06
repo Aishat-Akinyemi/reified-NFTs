@@ -84,6 +84,6 @@ The libraries used in the project include:
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | Material UI components | provides a simple, customizable, and accessible library of React components.                                                          |
 | Cudosjs                | is a library with which we interact with the Cudos blockchain.                                                                        |
-| Zod                    | is a data type declaration and validation library. We use it to declare, and validate the data type of the forms used in NFT minting. |
+| Zod                    | is a data type declaration and validation library. We use it to declare and validate the data type of the forms used in NFT minting. |
 | React Hook form        | used with Zod to create forms with Validation.                                                                                        |
 | notistack              | for snack bar notification.                                                                                                           |
